@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'MAGSocial_Example' do
+  pod 'MAGSocial', :path => '../'
+
+  target 'MAGSocial_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
