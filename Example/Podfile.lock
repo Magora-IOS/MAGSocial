@@ -1,0 +1,16 @@
+PODS:
+  - MAGSocial (0.1.0)
+
+DEPENDENCIES:
+  - MAGSocial (from `../`)
+
+EXTERNAL SOURCES:
+  MAGSocial:
+    :path: ../
+
+SPEC CHECKSUMS:
+  MAGSocial: b5046e50f589744c4a865130cdcb4cca4ca959f9
+
+PODFILE CHECKSUM: f5e4c7988c348a56b9c8506d7b3b9e884cdd0510
+
+COCOAPODS: 1.2.1
