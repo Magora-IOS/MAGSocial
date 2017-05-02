@@ -7,9 +7,9 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'MAGSocial'
+  s.name             = 'MAGSocialFacebook'
   s.version          = '0.0.3'
-  s.summary          = 'MAGSocial is a unified API for common and specific social network features'
+  s.summary          = 'MAGSocialFacebook is a custom API for Facebook'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,8 +18,8 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-MAGSocial provides unified API for common and specific social network features.
-Supported social networks and their features: TODO
+MAGSocialFacebook provides custom API for Facebook features.
+Supported features: TODO
                        DESC
 
   s.homepage         = 'https://github.com/Magora-IOS/MAGSocial'
@@ -31,7 +31,7 @@ Supported social networks and their features: TODO
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'MAGSocial/Classes/*'
+  s.source_files = 'MAGSocialFacebook/Classes/*'
   
   # s.resource_bundles = {
   #   'MAGSocial' => ['MAGSocial/Assets/*.png']
@@ -39,5 +39,6 @@ Supported social networks and their features: TODO
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'FBSDKCoreKit', '~> 4.22'
+  s.dependency 'FBSDKCoreKit', '~> 4.22'
+  s.dependency 'FBSDKLoginKit', '~> 4.22'
 end
