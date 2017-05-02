@@ -23,16 +23,39 @@ freely, subject to the following restrictions:
 
 #import "MAGViewController.h"
 
+#import "MAGSocial.h"
+#import "MAGSocialFacebook.h"
+
 @interface MAGViewController ()
 
 @end
 
 @implementation MAGViewController
 
-- (void)viewDidLoad
-{
+#pragma mark - PUBLIC
+
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    [self setupMAGViewController];
+}
+
+#pragma mark - PRIVATE
+
+- (void)setupMAGViewController {
+    [MAGSocial registerNetwork:[MAGSocialFacebook class]];
+}
+
+- (IBAction)authenticateFacebook:(id)sender {
+    NSLog(@"MAGViewController. Authenticate Facebook");
+    [MAGSocial
+        authenticateNetwork:[MAGSocialFacebook class]
+        withParentVC:self
+        success:^{
+            NSLog(@"MAGViewController. Successful Facebook authentication");
+        }
+        failure:^(NSError *error) {
+            NSLog(@"MAGViewController. Facebook authentication failed");
+        }];
 }
 
 @end

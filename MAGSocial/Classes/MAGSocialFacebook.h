@@ -21,7 +21,7 @@ freely, subject to the following restrictions:
 
 */
 
-#include "MAGSocialNetwork.h"
+#import "MAGSocialNetwork.h"
 
 @interface MAGSocialFacebook: NSObject <MAGSocialNetwork>
 

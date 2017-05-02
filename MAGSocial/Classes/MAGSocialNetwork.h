@@ -21,7 +21,7 @@ freely, subject to the following restrictions:
 
 */
 
-#include <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
 
 typedef void (^MAGSocialNetworkSuccessCallback)();
 typedef void (^MAGSocialNetworkFailureCallback)(NSError *error);
