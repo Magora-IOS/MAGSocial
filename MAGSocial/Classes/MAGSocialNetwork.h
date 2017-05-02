@@ -28,6 +28,11 @@ typedef void (^MAGSocialNetworkFailureCallback)(NSError *error);
 
 @protocol MAGSocialNetwork <NSObject>
 
++ (void)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
++ (BOOL)application:(UIApplication *)application
+    openURL:(NSURL *)url
+    options:(NSDictionary *)options;
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
     success:(MAGSocialNetworkSuccessCallback)success
     failure:(MAGSocialNetworkFailureCallback)failure;

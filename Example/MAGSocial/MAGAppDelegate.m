@@ -23,12 +23,28 @@ freely, subject to the following restrictions:
 
 #import "MAGAppDelegate.h"
 
+#import "MAGSocial.h"
+
 @implementation MAGAppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    [MAGSocial
+        application:application
+        didFinishLaunchingWithOptions:launchOptions];
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+    openURL:(NSURL *)url
+    options:(NSDictionary *)options {
+
+    return
+        [MAGSocial
+            application:application
+            openURL:url
+            options:options];
 }
 
 @end

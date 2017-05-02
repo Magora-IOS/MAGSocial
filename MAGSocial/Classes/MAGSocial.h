@@ -25,6 +25,11 @@ freely, subject to the following restrictions:
 
 @interface MAGSocial: NSObject
 
++ (void)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
++ (BOOL)application:(UIApplication *)application
+    openURL:(NSURL *)url
+    options:(NSDictionary *)options;
 + (void)authenticateNetwork:(Class<MAGSocialNetwork>)networkClass
     withParentVC:(UIViewController *)parentVC
     success:(MAGSocialNetworkSuccessCallback)success

@@ -23,17 +23,66 @@ freely, subject to the following restrictions:
 
 #import "MAGSocialFacebook.h"
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 @interface MAGSocialFacebook ()
 
 @end
 
 @implementation MAGSocialFacebook
 
++ (void)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    [[FBSDKApplicationDelegate sharedInstance]
+        application:application
+        didFinishLaunchingWithOptions:launchOptions];
+}
+
++ (BOOL)application:(UIApplication *)application
+    openURL:(NSURL *)url
+    options:(NSDictionary *)options {
+
+    BOOL handled =
+        [[FBSDKApplicationDelegate sharedInstance]
+            application:application
+            openURL:url
+            sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+            annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+    return handled;
+}
+
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
     success:(MAGSocialNetworkSuccessCallback)success
     failure:(MAGSocialNetworkFailureCallback)failure {
 
-    NSLog(@"MAGSocialFacebook.authenticate VC: '%@'", parentVC);
+    NSLog(@"MAGSocialFacebook. authenticate. VC: '%@'", parentVC);
+    FBSDKLoginManager *lm = [FBSDKLoginManager new];
+    // TODO: Get permissions from outside.
+    NSArray *permissions = @[ @"public_profile" ];
+    [lm logInWithReadPermissions:permissions
+        fromViewController:parentVC
+        handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+            if (error)
+            {
+                NSLog(@"MAGSocialFacebook. Could not authorize: '%@'", error);
+                if (failure) {
+                    failure(error);
+                }
+            }
+            else if (result.isCancelled) {
+                NSLog(@"MAGSocialFacebook. User cancelled authentication");
+            }
+            else {
+                if (success) {
+                    success();
+                }
+                NSLog(@"MAGSocialFacebook. Successful authentication");
+            }
+
+
+        }];
 }
 
 @end

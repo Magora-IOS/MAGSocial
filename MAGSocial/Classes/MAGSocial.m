@@ -23,11 +23,41 @@ freely, subject to the following restrictions:
 
 #import "MAGSocial.h"
 
+static NSMutableArray *magSocialNetworks;
+
 @interface MAGSocial ()
 
 @end
 
 @implementation MAGSocial
+
+#pragma mark - PUBLIC
+
++ (void)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    for (Class network in [self networks]) {
+        [network
+            application:application
+            didFinishLaunchingWithOptions:launchOptions];
+    }
+}
+
++ (BOOL)application:(UIApplication *)application
+    openURL:(NSURL *)url
+    options:(NSDictionary *)options {
+
+    for (Class network in [self networks]) {
+        BOOL handled = 
+            [network
+                application:application
+                openURL:url
+                options:options];
+        if (handled)
+            return YES;
+    }
+    return NO;
+}
 
 + (void)authenticateNetwork:(Class<MAGSocialNetwork>)networkClass
     withParentVC:(UIViewController *)parentVC
@@ -50,7 +80,20 @@ freely, subject to the following restrictions:
     else {
         NSLog(
             @"MAGSocial. Register network: '%@'", networkClass);
+        [[self networks] addObject:networkClass];
     }
+}
+
+#pragma mark - PRIVATE
+
++ (NSMutableArray *)networks {
+    static dispatch_once_t token;
+    dispatch_once(
+        &token,
+        ^{
+            magSocialNetworks = [NSMutableArray array];
+        });
+    return magSocialNetworks;
 }
 
 @end
