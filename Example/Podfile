@@ -5,6 +5,7 @@ use_frameworks!
 
 target 'MAGSocial_Example' do
   pod 'MAGSocial', :path => '../'
+  pod 'MAGSocialFacebook', :path => '../'
 
   target 'MAGSocial_Tests' do
     inherit! :search_paths

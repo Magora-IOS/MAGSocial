@@ -31,7 +31,7 @@ Supported features: TODO
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'MAGSocialFacebook/Classes/*'
+  s.source_files = 'MAGSocialFacebook/Classes/**/*'
   
   # s.resource_bundles = {
   #   'MAGSocial' => ['MAGSocial/Assets/*.png']
