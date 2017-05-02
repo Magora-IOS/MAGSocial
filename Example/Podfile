@@ -4,11 +4,8 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'MAGSocial_Example' do
-  #pod 'MAGSocial', :path => '../'
-  #pod 'MAGSocialFacebook', :path => '../'
-  pod 'MAGSocial', :git => 'https://github.com/Magora-IOS/MAGSocial.git'
-  pod 'MAGSocialFacebook', :git => 'https://github.com/Magora-IOS/MAGSocial.git'
-  pod 'UIButton+Activity'
+  pod 'MAGSocial', :path => '../'
+  pod 'MAGSocialFacebook', :path => '../'
 
   target 'MAGSocial_Tests' do
     inherit! :search_paths
