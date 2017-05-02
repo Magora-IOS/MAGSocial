@@ -40,4 +40,5 @@ Supported social networks and their features: TODO
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'FBSDKCoreKit', '~> 4.22'
+  s.dependency 'FBSDKLoginKit', '~> 4.22'
 end

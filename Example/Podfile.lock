@@ -1,5 +1,17 @@
 PODS:
-  - MAGSocial (0.0.1)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
+  - FBSDKCoreKit (4.22.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.22.0):
+    - FBSDKCoreKit
+  - MAGSocial (0.0.2):
+    - FBSDKCoreKit (~> 4.22)
+    - FBSDKLoginKit (~> 4.22)
 
 DEPENDENCIES:
   - MAGSocial (from `../`)
@@ -9,7 +21,10 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  MAGSocial: a589a93a715d762e6536161365c36c77d8077886
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  FBSDKCoreKit: c693bad19feb225469eeff14452ba364522ee48b
+  FBSDKLoginKit: 1fa529fc622d7b32ebeaffbecd377180833c6d30
+  MAGSocial: 35460fb3f73ca0d703f06826a609d09417bedfa3
 
 PODFILE CHECKSUM: 2ee0577a70d9995151423cd7e9f25caeedb5986a
 
