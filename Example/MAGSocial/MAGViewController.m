@@ -43,6 +43,8 @@ freely, subject to the following restrictions:
 
 - (void)setupMAGViewController {
     [MAGSocial registerNetwork:[MAGSocialFacebook class]];
+    // Produces error in logs.
+    [MAGSocial registerNetwork:[self class]];
 }
 
 - (IBAction)authenticateFacebook:(id)sender {
