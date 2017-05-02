@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MAGSocial'
-  s.version          = '0.0.3'
+  s.version          = '0.0.4'
   s.summary          = 'MAGSocial is a unified API for common and specific social network features'
 
 # This description is used to generate tags and improve search results.
@@ -29,7 +29,7 @@ Supported social networks and their features: TODO
   s.source           = { :git => 'https://github.com/Magora-IOS/MAGSocial.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+  #s.ios.deployment_target = '9.0'
 
   s.source_files = 'MAGSocial/Classes/**/*'
   
@@ -37,7 +37,7 @@ Supported social networks and their features: TODO
   #   'MAGSocial' => ['MAGSocial/Assets/*.png']
   # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
+  # s.public_header_files = 'MAGSocial/Classes/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'FBSDKCoreKit', '~> 4.22'
 end

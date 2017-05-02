@@ -48,7 +48,7 @@ freely, subject to the following restrictions:
             @"because it does not conform to MAGSocialNetwork protocol",
             networkClass);
     }
-    */
+     */
 }
 
 @end
