@@ -26,7 +26,7 @@ freely, subject to the following restrictions:
 typedef void (^MAGSocialNetworkSuccessCallback)();
 typedef void (^MAGSocialNetworkFailureCallback)(NSError *error);
 
-@protocol MAGSocialNetwork
+@protocol MAGSocialNetwork <NSObject>
 
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
     success:(MAGSocialNetworkSuccessCallback)success

@@ -41,14 +41,16 @@ freely, subject to the following restrictions:
 }
 
 + (void)registerNetwork:(Class<MAGSocialNetwork>)networkClass {
-    /*
     if (![networkClass conformsToProtocol:@protocol(MAGSocialNetwork)]) {
         NSLog(
             @"MAGSocial. Could not register network '%@', "
             @"because it does not conform to MAGSocialNetwork protocol",
             networkClass);
     }
-     */
+    else {
+        NSLog(
+            @"MAGSocial. Register network: '%@'", networkClass);
+    }
 }
 
 @end
