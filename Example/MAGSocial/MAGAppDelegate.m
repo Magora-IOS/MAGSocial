@@ -24,11 +24,17 @@ freely, subject to the following restrictions:
 #import "MAGAppDelegate.h"
 
 #import "MAGSocial.h"
+#import "MAGSocialFacebook.h"
 
 @implementation MAGAppDelegate
 
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    // Register FB.
+    [MAGSocial registerNetwork:[MAGSocialFacebook class]];
+    // Produces error in logs.
+    [MAGSocial registerNetwork:[self class]];
 
     [MAGSocial
         application:application

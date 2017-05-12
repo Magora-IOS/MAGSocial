@@ -36,16 +36,9 @@ freely, subject to the following restrictions:
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupMAGViewController];
 }
 
 #pragma mark - PRIVATE
-
-- (void)setupMAGViewController {
-    [MAGSocial registerNetwork:[MAGSocialFacebook class]];
-    // Produces error in logs.
-    [MAGSocial registerNetwork:[self class]];
-}
 
 - (IBAction)authenticateFacebook:(id)sender {
     NSLog(@"MAGViewController. Authenticate Facebook");
