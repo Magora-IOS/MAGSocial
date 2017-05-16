@@ -46,18 +46,18 @@
         <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
 
-    <!-- Facebook setup begins -->
+    <!-- Facebook setup begins for Magora account -->
     <key>CFBundleURLTypes</key>
     <array>
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>fb1892304344315933</string>
+          <string>fb676722582529525</string>
         </array>
       </dict>
     </array>
     <key>FacebookAppID</key>
-    <string>1892304344315933</string>
+    <string>676722582529525</string>
     <key>FacebookDisplayName</key>
     <string>MAGSocial</string>
     <key>LSApplicationQueriesSchemes</key>
