@@ -7,9 +7,9 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'MAGSocialFacebook'
+  s.name             = 'MAGSocialTwitter'
   s.version          = '0.0.4'
-  s.summary          = 'MAGSocialFacebook is a custom API for Facebook'
+  s.summary          = 'MAGSocialTwitter is a custom API for Twitter'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-MAGSocialFacebook provides custom API for Facebook features.
+MAGSocialTwitter provides custom API for Twitter features.
 Supported features: TODO
                        DESC
 
@@ -31,7 +31,7 @@ Supported features: TODO
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'MAGSocialFacebook/Classes/**/*'
+  s.source_files = 'MAGSocialTwitter/Classes/**/*'
   
   # s.resource_bundles = {
   #   'MAGSocial' => ['MAGSocial/Assets/*.png']
@@ -40,6 +40,6 @@ Supported features: TODO
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'MAGSocial'
-  s.dependency 'FBSDKCoreKit', '~> 4'
-  s.dependency 'FBSDKLoginKit', '~> 4'
+  s.dependency 'Fabric', '~> 1'
+  s.dependency 'TwitterKit', '~> 2'
 end

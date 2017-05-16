@@ -21,39 +21,18 @@ freely, subject to the following restrictions:
 
 */
 
-#import "MAGAppDelegate.h"
+#import "MAGSocialNetwork.h"
 
-#import "MAGSocial.h"
-#import "MAGSocialFacebook.h"
-#import "MAGSocialTwitter.h"
+@interface MAGSocialTwitter: NSObject <MAGSocialNetwork>
 
-@implementation MAGAppDelegate
-
-- (BOOL)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    // Register networks.
-    [MAGSocial registerNetwork:[MAGSocialFacebook class]];
-    [MAGSocial registerNetwork:[MAGSocialTwitter class]];
-    // Produces error in logs.
-    [MAGSocial registerNetwork:[self class]];
-
-    [MAGSocial
-        application:application
-        didFinishLaunchingWithOptions:launchOptions];
-    return YES;
-}
-
-- (BOOL)application:(UIApplication *)application
++ (void)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
++ (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
-    options:(NSDictionary *)options {
-
-    return
-        [MAGSocial
-            application:application
-            openURL:url
-            options:options];
-}
+    options:(NSDictionary *)options;
++ (void)authenticateWithParentVC:(UIViewController *)parentVC
+    success:(MAGSocialNetworkSuccessCallback)success
+    failure:(MAGSocialNetworkFailureCallback)failure;
 
 @end
 

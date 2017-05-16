@@ -1,11 +1,12 @@
 
 platform :ios, '9.0'
 
-use_frameworks!
+#use_frameworks!
 
 target 'MAGSocial_Example' do
   pod 'MAGSocial', :path => '../'
   pod 'MAGSocialFacebook', :path => '../'
+  pod 'MAGSocialTwitter', :path => '../'
 
   target 'MAGSocial_Tests' do
     inherit! :search_paths

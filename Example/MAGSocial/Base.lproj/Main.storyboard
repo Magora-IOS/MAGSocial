@@ -29,10 +29,20 @@
                                     <action selector="authenticateFacebook:" destination="whP-gf-Uak" eventType="touchUpInside" id="zGc-lL-RfM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mvC-JX-Wg4">
+                                <rect key="frame" x="16" y="170" width="343" height="30"/>
+                                <state key="normal" title="Authenticate / Twitter"/>
+                                <connections>
+                                    <action selector="authenticateTwitter:" destination="whP-gf-Uak" eventType="touchUpInside" id="T7a-4t-z5c"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Hnt-S3-PbN" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="CJr-MF-e2b"/>
+                            <constraint firstItem="mvC-JX-Wg4" firstAttribute="top" secondItem="Hnt-S3-PbN" secondAttribute="bottom" constant="20" id="L0d-Wd-WyL"/>
+                            <constraint firstItem="mvC-JX-Wg4" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="btM-eY-cFZ"/>
+                            <constraint firstItem="mvC-JX-Wg4" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="dCm-hg-PRd"/>
                             <constraint firstItem="Hnt-S3-PbN" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" constant="100" id="icI-Mw-6HY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hnt-S3-PbN" secondAttribute="trailing" id="lez-1Y-ZPZ"/>
                         </constraints>
