@@ -42,15 +42,25 @@
                                     <action selector="authenticateGoogle:" destination="whP-gf-Uak" eventType="touchUpInside" id="jnb-yn-2kV"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWP-2h-yYC">
+                                <rect key="frame" x="16" y="270" width="343" height="30"/>
+                                <state key="normal" title="Authenticate / VK"/>
+                                <connections>
+                                    <action selector="authenticateVK:" destination="whP-gf-Uak" eventType="touchUpInside" id="Z7t-Eu-jnO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Hnt-S3-PbN" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="CJr-MF-e2b"/>
                             <constraint firstItem="mvC-JX-Wg4" firstAttribute="top" secondItem="Hnt-S3-PbN" secondAttribute="bottom" constant="20" id="L0d-Wd-WyL"/>
                             <constraint firstItem="kIa-mg-rPw" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="NDR-qb-ABE"/>
+                            <constraint firstItem="uWP-2h-yYC" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="VKR-aa-bWp"/>
                             <constraint firstItem="kIa-mg-rPw" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="bWE-mO-u2i"/>
                             <constraint firstItem="mvC-JX-Wg4" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="btM-eY-cFZ"/>
+                            <constraint firstItem="uWP-2h-yYC" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="cA9-9u-Dfh"/>
                             <constraint firstItem="mvC-JX-Wg4" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="dCm-hg-PRd"/>
+                            <constraint firstItem="uWP-2h-yYC" firstAttribute="top" secondItem="kIa-mg-rPw" secondAttribute="bottom" constant="20" id="hwx-uS-Yp6"/>
                             <constraint firstItem="Hnt-S3-PbN" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" constant="100" id="icI-Mw-6HY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hnt-S3-PbN" secondAttribute="trailing" id="lez-1Y-ZPZ"/>
                             <constraint firstItem="kIa-mg-rPw" firstAttribute="top" secondItem="mvC-JX-Wg4" secondAttribute="bottom" constant="20" id="vEG-Jv-qsB"/>

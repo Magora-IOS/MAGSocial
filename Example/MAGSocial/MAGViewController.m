@@ -27,10 +27,15 @@ freely, subject to the following restrictions:
 #import "MAGSocialFacebook.h"
 #import "MAGSocialTwitter.h"
 #import "MAGSocialGoogle.h"
+#import "MAGSocialVK.h"
+
+
 
 @interface MAGViewController ()
 
 @end
+
+
 
 @implementation MAGViewController
 
@@ -78,6 +83,20 @@ freely, subject to the following restrictions:
      }
      failure:^(NSError *error) {
          NSLog(@"MAGViewController. Google authentication failed");
+     }];
+}
+
+
+- (IBAction)authenticateVK:(id)sender {
+    NSLog(@"MAGViewController. Authenticate Google");
+    [MAGSocial
+     authenticateNetwork:[MAGSocialVK class]
+     withParentVC:self
+     success:^{
+         NSLog(@"MAGViewController. Successful VK authentication");
+     }
+     failure:^(NSError *error) {
+         NSLog(@"MAGViewController. VK authentication failed");
      }];
 }
 

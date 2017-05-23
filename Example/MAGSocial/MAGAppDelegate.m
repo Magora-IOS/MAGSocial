@@ -27,6 +27,7 @@ freely, subject to the following restrictions:
 #import "MAGSocialFacebook.h"
 #import "MAGSocialTwitter.h"
 #import "MAGSocialGoogle.h"
+#import "MAGSocialVK.h"
 
 @implementation MAGAppDelegate
 
@@ -37,6 +38,7 @@ freely, subject to the following restrictions:
     [MAGSocial registerNetwork:[MAGSocialFacebook class]];
     [MAGSocial registerNetwork:[MAGSocialTwitter class]];
     [MAGSocial registerNetwork:[MAGSocialGoogle class]];
+    [MAGSocial registerNetwork:[MAGSocialVK class]];
     // Produces error in logs.
     [MAGSocial registerNetwork:[self class]];
 
