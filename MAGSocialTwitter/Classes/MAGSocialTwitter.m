@@ -23,41 +23,30 @@ freely, subject to the following restrictions:
 
 #import "MAGSocialTwitter.h"
 
-// TODO Twitter imports
+#import <Fabric/Fabric.h>
+#import <TwitterKit/TwitterKit.h>
+
+
 
 @interface MAGSocialTwitter ()
 
 @end
+
+
 
 @implementation MAGSocialTwitter
 
 + (void)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    /*
-     * TODO
-     *
-    [[FBSDKApplicationDelegate sharedInstance]
-        application:application
-        didFinishLaunchingWithOptions:launchOptions];
-        */
+    [Fabric with:@[Twitter.class]];
 }
 
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options {
 
-    BOOL handled =
-        false;
-        /*
-         * TODO
-         *
-        [[FBSDKApplicationDelegate sharedInstance]
-            application:application
-            openURL:url
-            sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-            annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
-            */
+    BOOL handled = [[Twitter sharedInstance] application:application openURL:url options:options];
     return handled;
 }
 
@@ -66,33 +55,15 @@ freely, subject to the following restrictions:
     failure:(MAGSocialNetworkFailureCallback)failure {
 
     NSLog(@"MAGSocialTwitter. authenticate. VC: '%@'", parentVC);
-    /*
-    FBSDKLoginManager *lm = [FBSDKLoginManager new];
-    // TODO: Get permissions from outside.
-    NSArray *permissions = @[ @"public_profile" ];
-    [lm logInWithReadPermissions:permissions
-        fromViewController:parentVC
-        handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-            if (error)
-            {
-                NSLog(@"MAGSocialFacebook. Could not authorize: '%@'", error);
-                if (failure) {
-                    failure(error);
-                }
-            }
-            else if (result.isCancelled) {
-                NSLog(@"MAGSocialFacebook. User cancelled authentication");
-            }
-            else {
-                if (success) {
-                    success();
-                }
-                NSLog(@"MAGSocialFacebook. Successful authentication");
-            }
-
-
-        }];
-        */
+    [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
+        if (session) {
+            NSLog(@"MAGSocialFacebook. Successful authentication");
+            success();
+        } else {
+            NSLog(@"MAGSocialFacebook. Could not authorize: '%@'", error);
+            failure(error);
+        }
+    }];
 }
 
 @end

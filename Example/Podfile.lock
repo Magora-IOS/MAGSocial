@@ -12,13 +12,13 @@ PODS:
     - FBSDKCoreKit
   - MAGSocial (0.0.4)
   - MAGSocialFacebook (0.0.4):
-    - FBSDKCoreKit (~> 4.22)
-    - FBSDKLoginKit (~> 4.22)
+    - FBSDKCoreKit (~> 4)
+    - FBSDKLoginKit (~> 4)
     - MAGSocial
   - MAGSocialTwitter (0.0.4):
-    - Fabric
+    - Fabric (~> 1)
     - MAGSocial
-    - TwitterKit
+    - TwitterKit (~> 2)
   - TwitterCore (2.8.0):
     - Fabric
   - TwitterKit (2.8.1):
@@ -31,11 +31,11 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   MAGSocial:
-    :path: ../
+    :path: "../"
   MAGSocialFacebook:
-    :path: ../
+    :path: "../"
   MAGSocialTwitter:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -43,11 +43,11 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: c693bad19feb225469eeff14452ba364522ee48b
   FBSDKLoginKit: 1fa529fc622d7b32ebeaffbecd377180833c6d30
   MAGSocial: 62ba33d0f4ecf3dd6cc5f0a0fdfc27bd8e70f1dc
-  MAGSocialFacebook: 511aea2ab2514a619b09e35646cb5a9eeb85b711
-  MAGSocialTwitter: 3adb8334346f2305a1f529689628c9a99529461c
+  MAGSocialFacebook: 3ed970b80921f59c2e35b43a751b08710cc48b9c
+  MAGSocialTwitter: 5312cc04af9a0eaf7366a73acd049d9c46ec6351
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
 PODFILE CHECKSUM: bad0dc877e7f9c6fd0788252624b3ac6a61a9b2c
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.2.0
