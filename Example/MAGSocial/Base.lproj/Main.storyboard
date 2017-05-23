@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="whP-gf-Uak">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="whP-gf-Uak">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,15 +35,25 @@
                                     <action selector="authenticateTwitter:" destination="whP-gf-Uak" eventType="touchUpInside" id="T7a-4t-z5c"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIa-mg-rPw">
+                                <rect key="frame" x="16" y="220" width="343" height="30"/>
+                                <state key="normal" title="Authenticate / Google"/>
+                                <connections>
+                                    <action selector="authenticateGoogle:" destination="whP-gf-Uak" eventType="touchUpInside" id="jnb-yn-2kV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Hnt-S3-PbN" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="CJr-MF-e2b"/>
                             <constraint firstItem="mvC-JX-Wg4" firstAttribute="top" secondItem="Hnt-S3-PbN" secondAttribute="bottom" constant="20" id="L0d-Wd-WyL"/>
+                            <constraint firstItem="kIa-mg-rPw" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="NDR-qb-ABE"/>
+                            <constraint firstItem="kIa-mg-rPw" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="bWE-mO-u2i"/>
                             <constraint firstItem="mvC-JX-Wg4" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="btM-eY-cFZ"/>
                             <constraint firstItem="mvC-JX-Wg4" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="dCm-hg-PRd"/>
                             <constraint firstItem="Hnt-S3-PbN" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" constant="100" id="icI-Mw-6HY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hnt-S3-PbN" secondAttribute="trailing" id="lez-1Y-ZPZ"/>
+                            <constraint firstItem="kIa-mg-rPw" firstAttribute="top" secondItem="mvC-JX-Wg4" secondAttribute="bottom" constant="20" id="vEG-Jv-qsB"/>
                         </constraints>
                     </view>
                 </viewController>

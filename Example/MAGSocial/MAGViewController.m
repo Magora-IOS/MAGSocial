@@ -26,6 +26,7 @@ freely, subject to the following restrictions:
 #import "MAGSocial.h"
 #import "MAGSocialFacebook.h"
 #import "MAGSocialTwitter.h"
+#import "MAGSocialGoogle.h"
 
 @interface MAGViewController ()
 
@@ -65,6 +66,19 @@ freely, subject to the following restrictions:
         failure:^(NSError *error) {
             NSLog(@"MAGViewController. Twitter authentication failed");
         }];
+}
+
+- (IBAction)authenticateGoogle:(id)sender {
+    NSLog(@"MAGViewController. Authenticate Google");
+    [MAGSocial
+     authenticateNetwork:[MAGSocialGoogle class]
+     withParentVC:self
+     success:^{
+         NSLog(@"MAGViewController. Successful Google authentication");
+     }
+     failure:^(NSError *error) {
+         NSLog(@"MAGViewController. Google authentication failed");
+     }];
 }
 
 @end

@@ -7,6 +7,7 @@ target 'MAGSocial_Example' do
   pod 'MAGSocial', :path => '../'
   pod 'MAGSocialFacebook', :path => '../'
   pod 'MAGSocialTwitter', :path => '../'
+  pod 'MAGSocialGoogle', :path => '../'
 
   target 'MAGSocial_Tests' do
     inherit! :search_paths
