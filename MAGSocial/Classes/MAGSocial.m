@@ -22,26 +22,68 @@ freely, subject to the following restrictions:
 */
 
 #import "MAGSocial.h"
+#import "MAGSocialSettings.h"
 
-static NSMutableArray *magSocialNetworks;
+static NSMutableArray<Class<MAGSocialNetwork>> *magSocialNetworks;
+
+
 
 @interface MAGSocial ()
 
 @end
 
+
+
+
 @implementation MAGSocial
 
+
+
 #pragma mark - PUBLIC
+
++ (void)registerNetwork:(Class<MAGSocialNetwork>)networkClass {
+    if ([networkClass.class conformsToProtocol:@protocol(MAGSocialNetwork)]) {
+        NSLog(@"MAGSocial. Register network: '%@'", networkClass);
+        [[self networks] addObject:networkClass];
+    }
+    else {
+        NSLog(
+              @"MAGSocial. Could not register network '%@', "
+              @"because it does not conform to MAGSocialNetwork protocol",
+              networkClass);
+        
+    }
+}
+
+
 
 + (void)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     for (Class network in [self networks]) {
-        [network
-            application:application
-            didFinishLaunchingWithOptions:launchOptions];
+        [network configureWithApplication:application andLaunchOptions:launchOptions];
     }
 }
+
+
++ (nullable NSDictionary *) settingsPlist {
+    static NSDictionary *result = nil;
+    @synchronized(self) {
+        if (result == nil) {
+            NSString *path = [[NSBundle mainBundle] pathForResource:MAGSocialSettings.plistFileName ofType:@"plist"];
+            if (path != nil) {
+                result = [[NSDictionary alloc]initWithContentsOfFile:path];
+            }
+            else {
+                result = @{};
+            }
+        }
+    }
+    return result;
+}
+
+
+
 
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
@@ -59,6 +101,7 @@ static NSMutableArray *magSocialNetworks;
     return NO;
 }
 
+
 + (void)authenticateNetwork:(Class<MAGSocialNetwork>)networkClass
     withParentVC:(UIViewController *)parentVC
     success:(MAGSocialNetworkSuccessCallback)success
@@ -70,31 +113,22 @@ static NSMutableArray *magSocialNetworks;
         failure:failure];
 }
 
-+ (void)registerNetwork:(Class<MAGSocialNetwork>)networkClass {
-    if (![networkClass conformsToProtocol:@protocol(MAGSocialNetwork)]) {
-        NSLog(
-            @"MAGSocial. Could not register network '%@', "
-            @"because it does not conform to MAGSocialNetwork protocol",
-            networkClass);
-    }
-    else {
-        NSLog(
-            @"MAGSocial. Register network: '%@'", networkClass);
-        [[self networks] addObject:networkClass];
-    }
-}
 
+
+
+         
 #pragma mark - PRIVATE
 
-+ (NSMutableArray *)networks {
++ (NSMutableArray<Class<MAGSocialNetwork>> *)networks {
     static dispatch_once_t token;
     dispatch_once(
         &token,
         ^{
-            magSocialNetworks = [NSMutableArray array];
+            magSocialNetworks = [NSMutableArray<MAGSocialNetwork> array];
         });
     return magSocialNetworks;
 }
 
+         
 @end
 

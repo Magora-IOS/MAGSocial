@@ -39,7 +39,6 @@ freely, subject to the following restrictions:
 @implementation MAGSocialGoogle
 
 //MARK: - Lifecycle
-
 + (MAGSocialGoogle*)sharedInstance {
     static MAGSocialGoogle *sharedInstance = nil;
     @synchronized(self) {
@@ -51,17 +50,32 @@ freely, subject to the following restrictions:
 
 
 
-+ (void)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+//MARK: - Configuration
++ (void)configureWithApplication:(UIApplication *)application
+                andLaunchOptions:(NSDictionary *)launchOptions {
+    [[self settings] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL* stop) {
+        if ([key isEqual: @"CLIENT_ID"]) {
+            [GIDSignIn sharedInstance].clientID = value;
+        }
+    }];
+    
+    /*
     NSError* configureError;
     [[GGLContext sharedInstance] configureWithError: &configureError];
     //TODO: throw exception?
     NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+     */
     
     [GIDSignIn sharedInstance].delegate = [self sharedInstance];
     [GIDSignIn sharedInstance].uiDelegate = [self sharedInstance];
 }
+
+
+
+
+
+
+
 
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url

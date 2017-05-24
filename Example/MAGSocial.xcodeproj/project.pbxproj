@@ -24,7 +24,7 @@
 		7B41853A012FD21C6E6C3E9E /* libPods-MAGSocial_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D674419064051C10D3507B1 /* libPods-MAGSocial_Example.a */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		A48CAA8864C83AE25AD11381 /* libPods-MAGSocial_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBFEC216E2C9D1720E9500F9 /* libPods-MAGSocial_Tests.a */; };
-		C77418571ED4233500BECC52 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C77418561ED4233500BECC52 /* GoogleService-Info.plist */; };
+		C76F1B8C1ED54A600045E9F8 /* MAGSocial-Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = C76F1B8B1ED54A600045E9F8 /* MAGSocial-Settings.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +65,7 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9DED2F71BD6E84118B2F6F6E /* Pods-MAGSocial_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MAGSocial_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MAGSocial_Tests/Pods-MAGSocial_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A153BD1980D40E2AE4F9D07B /* Pods-MAGSocial_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MAGSocial_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MAGSocial_Tests/Pods-MAGSocial_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		C77418561ED4233500BECC52 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C76F1B8B1ED54A600045E9F8 /* MAGSocial-Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MAGSocial-Settings.plist"; sourceTree = "<group>"; };
 		D91EC1FBFB59AA8934D6B0AA /* MAGSocial.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MAGSocial.podspec; path = ../MAGSocial.podspec; sourceTree = "<group>"; };
 		EF27BBF40DAA5E3860309EC0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		FBFEC216E2C9D1720E9500F9 /* libPods-MAGSocial_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MAGSocial_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,11 +161,11 @@
 		6003F594195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C77418561ED4233500BECC52 /* GoogleService-Info.plist */,
 				6003F595195388D20070C39A /* MAGSocial-Info.plist */,
 				6003F596195388D20070C39A /* InfoPlist.strings */,
 				6003F599195388D20070C39A /* main.m */,
 				6003F59B195388D20070C39A /* MAGSocial-Prefix.pch */,
+				C76F1B8B1ED54A600045E9F8 /* MAGSocial-Settings.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -285,8 +285,8 @@
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
-				C77418571ED4233500BECC52 /* GoogleService-Info.plist in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				C76F1B8C1ED54A600045E9F8 /* MAGSocial-Settings.plist in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -53,7 +53,6 @@ PODS:
   - MAGSocialGoogle (0.0.4):
     - Google/SignIn
   - MAGSocialTwitter (0.0.4):
-    - Fabric (~> 1)
     - MAGSocial
     - TwitterKit (~> 2)
   - MAGSocialVK (0.0.4):
@@ -100,7 +99,7 @@ SPEC CHECKSUMS:
   MAGSocial: 62ba33d0f4ecf3dd6cc5f0a0fdfc27bd8e70f1dc
   MAGSocialFacebook: 3ed970b80921f59c2e35b43a751b08710cc48b9c
   MAGSocialGoogle: d55fd63d0c535ef275710f8f90a8b612d4b7bb35
-  MAGSocialTwitter: 5312cc04af9a0eaf7366a73acd049d9c46ec6351
+  MAGSocialTwitter: 862dbb7dd1ccafdac54b3f42cc171f71cdea775b
   MAGSocialVK: e4fa38940dfea60d716ef9d57413927a9402ae6a
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942

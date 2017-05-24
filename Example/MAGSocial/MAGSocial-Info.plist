@@ -20,6 +20,8 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+    
+    
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -55,35 +57,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>43dbe2724d32859e07ef950cc13f70bf2e35a2b0</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict>
-					<key>consumerKey</key>
-					<string>FHAGOsnVgJXwqaSnY3O5cCWIt</string>
-					<key>consumerSecret</key>
-					<string>DPo0KbG4WUgrQrNqkh1lgMSIeGPGs8KUoad7NlZpXndooA1I23</string>
-				</dict>
-				<key>KitName</key>
-				<string>Twitter</string>
-			</dict>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
-	<key>FacebookAppID</key>
-	<string>676722582529525</string>
-	<key>FacebookDisplayName</key>
-	<string>MAGSocial</string>
+
+    
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -94,6 +69,9 @@
 		<string>vk-share</string>
 		<string>vkauthorize</string>
 	</array>
+    
+    
+    
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>

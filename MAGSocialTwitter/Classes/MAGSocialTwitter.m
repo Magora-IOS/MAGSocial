@@ -36,11 +36,16 @@ freely, subject to the following restrictions:
 
 @implementation MAGSocialTwitter
 
-+ (void)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [Fabric with:@[Twitter.class]];
+
+//MARK: - Configuration
++ (void)configureWithApplication:(UIApplication *)application
+                andLaunchOptions:(NSDictionary *)launchOptions {
+    //[Fabric with:@[Twitter.class]];
+    NSDictionary *settings = [self settings];
+    [[Twitter sharedInstance] startWithConsumerKey:settings[@"consumerKey"] consumerSecret:settings[@"consumerSecret"]];
 }
+
 
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
@@ -49,6 +54,7 @@ freely, subject to the following restrictions:
     BOOL handled = [[Twitter sharedInstance] application:application openURL:url options:options];
     return handled;
 }
+
 
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
     success:(MAGSocialNetworkSuccessCallback)success
