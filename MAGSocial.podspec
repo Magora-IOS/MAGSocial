@@ -32,12 +32,8 @@ Supported social networks and their features: TODO
   s.ios.deployment_target = '9.0'
 
   s.source_files = 'MAGSocial/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'MAGSocial' => ['MAGSocial/Assets/*.png']
-  # }
+  s.preserve_path =  'MAGSocial/ConfigureMainPlist.sh'
+  s.user_target_xcconfig = { 'MAGSocialPlistSettingsFileName' => 'MAGSocial-Settings.plist' }
 
-  # s.public_header_files = 'MAGSocial/Classes/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'FBSDKCoreKit', '~> 4.22'
+
 end

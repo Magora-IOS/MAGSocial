@@ -21,18 +21,13 @@ freely, subject to the following restrictions:
 
 */
 
-#import "MAGSocialNetwork.h"
+#import "MAGSocialNetworkBase.h"
 
-@interface MAGSocialFacebook: NSObject <MAGSocialNetwork>
+@interface MAGSocialFacebook: MAGSocialNetworkBase
 
-+ (void)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
-+ (BOOL)application:(UIApplication *)application
-    openURL:(NSURL *)url
-    options:(NSDictionary *)options;
-+ (void)authenticateWithParentVC:(UIViewController *)parentVC
-    success:(MAGSocialNetworkSuccessCallback)success
-    failure:(MAGSocialNetworkFailureCallback)failure;
+
+
+
 
 @end
 

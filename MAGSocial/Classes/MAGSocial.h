@@ -23,18 +23,26 @@ freely, subject to the following restrictions:
 
 #include "MAGSocialNetwork.h"
 
+
+
 @interface MAGSocial: NSObject
 
+//MARK: - Configuration
++ (void)registerNetwork:(Class<MAGSocialNetwork>)networkClass;
 + (void)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+
++ (nullable NSDictionary *) settingsPlist;
+
+
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options;
+
 + (void)authenticateNetwork:(Class<MAGSocialNetwork>)networkClass
     withParentVC:(UIViewController *)parentVC
     success:(MAGSocialNetworkSuccessCallback)success
     failure:(MAGSocialNetworkFailureCallback)failure;
-+ (void)registerNetwork:(Class<MAGSocialNetwork>)networkClass;
 
 @end
 

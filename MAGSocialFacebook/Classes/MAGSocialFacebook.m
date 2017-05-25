@@ -26,19 +26,39 @@ freely, subject to the following restrictions:
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
+
+
 @interface MAGSocialFacebook ()
 
 @end
 
+
+
+
 @implementation MAGSocialFacebook
 
-+ (void)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+//MARK: - Configuration
++ (void)configureWithApplication:(UIApplication *)application
+                andLaunchOptions:(NSDictionary *)launchOptions {
+    [[self settings] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL* stop) {
+        if ([key isEqual: @"FacebookAppID"]) {
+            [FBSDKSettings setAppID:value];
+        }
+        else if ([key isEqual: @"FacebookDisplayName"]) {
+            [FBSDKSettings setDisplayName:value];
+        }
+    }];
+    
     [[FBSDKApplicationDelegate sharedInstance]
-        application:application
-        didFinishLaunchingWithOptions:launchOptions];
+     application:application
+     didFinishLaunchingWithOptions:launchOptions];
 }
+
+
+
+
+
 
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
@@ -52,6 +72,7 @@ freely, subject to the following restrictions:
             annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
     return handled;
 }
+
 
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
     success:(MAGSocialNetworkSuccessCallback)success

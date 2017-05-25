@@ -21,12 +21,13 @@ freely, subject to the following restrictions:
 
 */
 
-#import "MAGSocialNetwork.h"
+#import "MAGSocialNetworkBase.h"
 
-@interface MAGSocialTwitter: NSObject <MAGSocialNetwork>
 
-+ (void)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+
+@interface MAGSocialTwitter: MAGSocialNetworkBase
+
+
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options;

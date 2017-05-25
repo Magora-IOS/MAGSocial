@@ -40,7 +40,6 @@ freely, subject to the following restrictions:
 
 
 //MARK: - Lifecycle
-
 + (MAGSocialVK*)sharedInstance {
     static MAGSocialVK *sharedInstance = nil;
     @synchronized(self) {
@@ -50,13 +49,23 @@ freely, subject to the following restrictions:
     return sharedInstance;
 }
 
-+ (void)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [VKSdk initializeWithAppId:@"6044011"];
+//MARK: - Configuration
++ (void)configureWithApplication:(UIApplication *)application
+                andLaunchOptions:(NSDictionary *)launchOptions {
+    [[self settings] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL* stop) {
+        if ([key isEqual: @"AppID"]) {
+            [VKSdk initializeWithAppId:@"6044011"];
+        }
+    }];
+    
     VKSdk.instance.uiDelegate = [self sharedInstance];
     [VKSdk.instance registerDelegate:[self sharedInstance]];
 }
+
+
+
+
 
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
@@ -65,6 +74,7 @@ freely, subject to the following restrictions:
     BOOL handled = [VKSdk processOpenURL:url fromApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
     return handled;
 }
+
 
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
     success:(MAGSocialNetworkSuccessCallback)success
