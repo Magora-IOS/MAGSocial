@@ -84,7 +84,7 @@ freely, subject to the following restrictions:
     [self sharedInstance].success = success;
     [self sharedInstance].failure = failure;
     
-    NSLog(@"MAGSocialVK. authenticate. VC: '%@'", parentVC);
+    NSLog(@"%@. authenticate. VC: '%@'", self.moduleName, parentVC);
     [VKSdk authorize:@[@"email"]];
 }
 
@@ -95,15 +95,15 @@ freely, subject to the following restrictions:
 - (void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result {
     if (result.token) {
         self.success();
-        NSLog(@"MAGSocialVK. Successful authentication");
+        NSLog(@"%@. Successful authentication", self.class.moduleName);
     } else if (result.error) {
-        NSLog(@"MAGSocialVK. Could not authorize: '%@'", result.error);
+        NSLog(@"%@. Could not authorize: '%@'", self.class.moduleName, result.error);
         self.failure(result.error);
     }
 }
 
 - (void)vkSdkUserAuthorizationFailed {
-    NSLog(@"MAGSocialVK. Could not authorize");
+    NSLog(@"%@. Could not authorize", self.class.moduleName);
     self.failure(nil);
 }
 

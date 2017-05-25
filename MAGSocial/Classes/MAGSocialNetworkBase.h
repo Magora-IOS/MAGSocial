@@ -17,4 +17,5 @@
 
 + (nullable NSDictionary *) settings;
 
+
 @end

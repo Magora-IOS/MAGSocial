@@ -60,13 +60,13 @@ freely, subject to the following restrictions:
     success:(MAGSocialNetworkSuccessCallback)success
     failure:(MAGSocialNetworkFailureCallback)failure {
 
-    NSLog(@"MAGSocialTwitter. authenticate. VC: '%@'", parentVC);
+    NSLog(@"%@. authenticate. VC: '%@'", self.moduleName, parentVC);
     [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
         if (session) {
-            NSLog(@"MAGSocialFacebook. Successful authentication");
+            NSLog(@"%@. Successful authentication", self.moduleName);
             success();
         } else {
-            NSLog(@"MAGSocialFacebook. Could not authorize: '%@'", error);
+            NSLog(@"%@. Could not authorize: '%@'", self.moduleName, error);
             failure(error);
         }
     }];

@@ -78,7 +78,7 @@ freely, subject to the following restrictions:
     success:(MAGSocialNetworkSuccessCallback)success
     failure:(MAGSocialNetworkFailureCallback)failure {
 
-    NSLog(@"MAGSocialFacebook. authenticate. VC: '%@'", parentVC);
+    NSLog(@"%@. authenticate. VC: '%@'", self.moduleName, parentVC);
     FBSDKLoginManager *lm = [FBSDKLoginManager new];
     // TODO: Get permissions from outside.
     NSArray *permissions = @[ @"public_profile" ];
@@ -87,19 +87,19 @@ freely, subject to the following restrictions:
         handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
             if (error)
             {
-                NSLog(@"MAGSocialFacebook. Could not authorize: '%@'", error);
+                NSLog(@"%@. Could not authorize: '%@'", self.moduleName, error);
                 if (failure) {
                     failure(error);
                 }
             }
             else if (result.isCancelled) {
-                NSLog(@"MAGSocialFacebook. User cancelled authentication");
+                NSLog(@"%@. User cancelled authentication", self.moduleName);
             }
             else {
                 if (success) {
                     success();
                 }
-                NSLog(@"MAGSocialFacebook. Successful authentication");
+                NSLog(@"%@. Successful authentication", self.moduleName);
             }
 
 

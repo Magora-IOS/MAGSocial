@@ -24,7 +24,7 @@ freely, subject to the following restrictions:
 #include "MAGSocialNetwork.h"
 
 
-
+NS_ASSUME_NONNULL_BEGIN
 @interface MAGSocial: NSObject
 
 //MARK: - Configuration
@@ -45,4 +45,4 @@ freely, subject to the following restrictions:
     failure:(MAGSocialNetworkFailureCallback)failure;
 
 @end
-
+NS_ASSUME_NONNULL_END

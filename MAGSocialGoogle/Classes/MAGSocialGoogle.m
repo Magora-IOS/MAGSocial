@@ -96,7 +96,7 @@ freely, subject to the following restrictions:
     [self sharedInstance].success = success;
     [self sharedInstance].failure = failure;
     
-    NSLog(@"MAGSocialGoogle. authenticate. VC: '%@'", parentVC);
+    NSLog(@"%@. authenticate. VC: '%@'", self.moduleName, parentVC);
     [[GIDSignIn sharedInstance] signIn];
 }
 
@@ -109,12 +109,12 @@ didSignInForUser:(GIDGoogleUser *)user
     withError:(NSError *)error {
     if (error)
     {
-        NSLog(@"MAGSocialGoogle. Could not authorize: '%@'", error);
+        NSLog(@"%@. Could not authorize: '%@'", self.class.moduleName, error);
         self.failure(error);
     }
     else {
         self.success();
-        NSLog(@"MAGSocialGoogle. Successful authentication");
+        NSLog(@"%@. Successful authentication", self.class.moduleName);
     }
 }
 

@@ -9,18 +9,23 @@
 #ifndef MAGSocialNetwork_h
 #define MAGSocialNetwork_h
 
+NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^MAGSocialNetworkSuccessCallback)();
-typedef void (^MAGSocialNetworkFailureCallback)(NSError *error);
+typedef void (^MAGSocialNetworkFailureCallback)(NSError * _Nullable error);
 
 
 
 
 @protocol MAGSocialNetwork <NSObject>
 
+
+@property (class, nonatomic, nonnull, readonly) NSString *moduleName;
+
+
 + (void)configure;
-+ (void)configureWithApplication:(UIApplication *)application
-                andLaunchOptions:(NSDictionary *)launchOptions;
++ (void)configureWithApplication:(nullable UIApplication *)application
+                andLaunchOptions:(nullable NSDictionary *)launchOptions;
 
 
 
@@ -33,5 +38,6 @@ typedef void (^MAGSocialNetworkFailureCallback)(NSError *error);
 
 @end
 
+NS_ASSUME_NONNULL_END
 
 #endif /* MAGSocialNetwork_h */
