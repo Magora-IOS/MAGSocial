@@ -18,4 +18,9 @@
 }
 
 
+- (NSString *) description {
+    return [NSString stringWithFormat:@"Auth: token %@", self.token];
+}
+
+
 @end

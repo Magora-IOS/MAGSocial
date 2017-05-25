@@ -22,6 +22,7 @@ freely, subject to the following restrictions:
 */
 
 #import "MAGSocialVK.h"
+#import "MAGSocialUser.h"
 #import <VKSdk.h>
 
 
@@ -84,22 +85,18 @@ freely, subject to the following restrictions:
     [self sharedInstance].authSuccess = success;
     [self sharedInstance].failure = failure;
     
-    NSLog(@"%@. authenticate. VC: '%@'", self.moduleName, parentVC);
+    NSLog(@"%@ authenticate", self.moduleName);
+    if ( [VKSdk isLoggedIn] ) {
+        [VKSdk forceLogout];
+    }
     [VKSdk authorize:@[@"email"]];
 }
 
 
-+ (MAGSocialAuth *)createAuthResult:(VKAuthorizationResult *)raw {
-    MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
-    result.token = raw.token.accessToken;
-    return result;
-}
-
-
-//MARK: - VKSdkDelegate, VKSdkUIDelegate
 - (void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result {
     if (result.token) {
-        self.authSuccess([self.class createAuthResult:result]);
+        [self.parentVC dismissViewControllerAnimated:true completion:nil];
+        self.authSuccess([self.class createAuth:result]);
         NSLog(@"%@. Successful authentication", self.class.moduleName);
     } else if (result.error) {
         NSLog(@"%@. Could not authorize: '%@'", self.class.moduleName, result.error);
@@ -122,6 +119,26 @@ freely, subject to the following restrictions:
 - (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError {
     //TODO: captcha ui
 }
+
+
++ (MAGSocialAuth *)createAuth:(VKAuthorizationResult *)raw {
+    MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
+    result.token = raw.token.accessToken;
+    result.userData = [self createUser:raw.user];
+    return result;
+}
+
+
++ (MAGSocialUser *) createUser:(VKUser *)raw {
+    MAGSocialUser *result = [[MAGSocialUser alloc] initWith:raw];
+    result.objectID = raw.id.stringValue;
+    result.name = [NSString stringWithFormat:@"%@ %@", raw.first_name, raw.last_name];
+    return result;
+}
+
+
+
+
 
 
 @end

@@ -22,7 +22,7 @@ freely, subject to the following restrictions:
 */
 
 #import "MAGSocialFacebook.h"
-
+#import "MAGSocialUser.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
@@ -79,7 +79,7 @@ freely, subject to the following restrictions:
     success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
 
-    NSLog(@"%@. authenticate. VC: '%@'", self.moduleName, parentVC);
+    NSLog(@"%@ authenticate", self.moduleName);
     FBSDKLoginManager *lm = [FBSDKLoginManager new];
     
     //TODO: Get permissions from outside.
@@ -95,18 +95,28 @@ freely, subject to the following restrictions:
                 NSLog(@"%@. User cancelled authentication", self.moduleName);
             }
             else {
-                success([self createAuthResult:result]);
+                success([self createAuth:result]);
                 NSLog(@"%@. Successful authentication", self.moduleName);
             }
         }];
 }
 
 
-+ (MAGSocialAuth *)createAuthResult:(FBSDKLoginManagerLoginResult *)raw {
++ (MAGSocialAuth *)createAuth:(FBSDKLoginManagerLoginResult *)raw {
     MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
     result.token = raw.token.tokenString;
+    result.userData = [self createUser:raw];
     return result;
 }
+
+
++ (MAGSocialUser *)createUser:(FBSDKLoginManagerLoginResult *)raw {
+    MAGSocialUser *result = [[MAGSocialUser alloc] initWith:raw];
+    result.objectID = raw.token.userID;
+    return result;
+}
+
+
 
 
 @end

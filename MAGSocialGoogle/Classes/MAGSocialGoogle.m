@@ -22,6 +22,7 @@ freely, subject to the following restrictions:
 */
 
 #import "MAGSocialGoogle.h"
+#import "MAGSocialUser.h"
 #import <Google/SignIn.h>
 
 
@@ -97,14 +98,11 @@ freely, subject to the following restrictions:
     [self sharedInstance].authSuccess = success;
     [self sharedInstance].failure = failure;
     
-    NSLog(@"%@. authenticate. VC: '%@'", self.moduleName, parentVC);
+    NSLog(@"%@ authenticate", self.moduleName);
     [[GIDSignIn sharedInstance] signIn];
 }
 
 
-
-
-//MARK: - GIDSignInDelegate, GIDSignInUIDelegate
 - (void)signIn:(GIDSignIn *)signIn
 didSignInForUser:(GIDGoogleUser *)user
     withError:(NSError *)error {
@@ -114,15 +112,25 @@ didSignInForUser:(GIDGoogleUser *)user
         self.failure(error);
     }
     else {
-        self.authSuccess([self.class createAuthResult:user]);
+        self.authSuccess([self.class createAuth:user]);
         NSLog(@"%@. Successful authentication", self.class.moduleName);
     }
 }
 
 
-+ (MAGSocialAuth *) createAuthResult:(GIDGoogleUser *)raw {
++ (MAGSocialAuth *) createAuth:(GIDGoogleUser *)raw {
     MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
     result.token = raw.authentication.accessToken;
+    result.userData = [self createUser:raw];
+    return result;
+}
+
+
++ (MAGSocialUser *) createUser:(GIDGoogleUser *)raw {
+    MAGSocialUser *result = [[MAGSocialUser alloc] initWith:raw];
+    result.objectID = raw.userID;
+    result.name = raw.profile.name;
+    result.email = raw.profile.email;
     return result;
 }
 

@@ -23,6 +23,7 @@ freely, subject to the following restrictions:
 
 #import "MAGSocialTwitter.h"
 #import "MAGSocial.h"
+#import "MAGSocialUser.h"
 #import <Fabric/Fabric.h>
 #import <TwitterKit/TwitterKit.h>
 
@@ -62,11 +63,11 @@ freely, subject to the following restrictions:
     success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
 
-    NSLog(@"%@. authenticate. VC: '%@'", self.moduleName, parentVC);
+    NSLog(@"%@ authenticate", self.moduleName);
     [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
         if (session) {
             NSLog(@"%@. Successful authentication", self.moduleName);
-            success([self createAuthResult:session]);
+            success([self createAuth:session]);
         } else {
             NSLog(@"%@. Could not authorize: '%@'", self.moduleName, error);
             failure(error);
@@ -76,11 +77,21 @@ freely, subject to the following restrictions:
 
 
 
-+ (MAGSocialAuth *)createAuthResult:(TWTRSession *)raw {
++ (MAGSocialAuth *)createAuth:(TWTRSession *)raw {
     MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
     result.token = raw.authToken;
+    result.userData = [self createUser:raw];
     return result;
 }
+
+
++ (MAGSocialUser *) createUser:(TWTRSession *)raw {
+    MAGSocialUser *result = [[MAGSocialUser alloc] initWith:raw];
+    result.objectID = raw.userID;
+    result.name = raw.userName;
+    return result;
+}
+
 
 
 @end

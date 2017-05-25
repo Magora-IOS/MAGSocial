@@ -74,7 +74,9 @@ freely, subject to the following restrictions:
                       withParentVC:self
                            success:^(MAGSocialAuth * _Nonnull data) {
         NSLog(@"MAGViewController. Successful %@ authentication", [network moduleName]);
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"token" message:data.token preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Result"
+                                                                       message:[NSString stringWithFormat:@"%@\n\n%@", data, data.userData]
+                                                                preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alert animated:true completion:nil];
                     
