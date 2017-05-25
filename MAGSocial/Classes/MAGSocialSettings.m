@@ -6,17 +6,17 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+
+#import "MAGSocialSettings.h"
+
 
 
 @implementation MAGSocialSettings
 
-static NSString *_plistFileName = @"MAGSocial-Settings";
 
-
-
+//TODO: how to get from podspec?
 + (NSString *) plistFileName {
-    return _plistFileName;
+    return @"MAGSocial-Settings";
 }
 
 

@@ -2,57 +2,70 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    
 	<key>MAGSocialFacebook</key>
 	<dict>
-        <key>FacebookAppID</key>
-        <string>676722582529525</string>
-        <key>FacebookDisplayName</key>
-        <string>MAGSocial</string>
-    </dict>
-    
-    
+		<key>FacebookAppID</key>
+		<string>676722582529525</string>
+		<key>FacebookDisplayName</key>
+		<string>MAGSocial</string>
+		<key>CFBundleURLScheme</key>
+		<string>fb676722582529525</string>
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>fbapi</string>
+			<string>fb-messenger-api</string>
+			<string>fbauth2</string>
+			<string>fbshareextension</string>
+		</array>
+	</dict>
 	<key>MAGSocialVK</key>
 	<dict>
-        <key>AppID</key>
-        <string>6044011</string>
-    </dict>
-    
-    
-	<key>MAGSocialGoogle</key>
-    <dict>
-        <key>CLIENT_ID</key>
-        <string>576444901873-ncv8mgsd7fkakock9d2j1l6mnk0l0dpo.apps.googleusercontent.com</string>
-        <key>REVERSED_CLIENT_ID</key>
-        <string>com.googleusercontent.apps.576444901873-ncv8mgsd7fkakock9d2j1l6mnk0l0dpo</string>
-        <key>PLIST_VERSION</key>
-        <string>1</string>
-        <key>BUNDLE_ID</key>
-        <string>org.cocoapods.demo.MAGSocial-Example</string>
-        <key>PROJECT_ID</key>
-        <string>project-5341242969335748028</string>
-        <key>IS_ADS_ENABLED</key>
-        <false/>
-        <key>IS_ANALYTICS_ENABLED</key>
-        <false/>
-        <key>IS_APPINVITE_ENABLED</key>
-        <false/>
-        <key>IS_GCM_ENABLED</key>
-        <false/>
-        <key>IS_SIGNIN_ENABLED</key>
-        <true/>
-        <key>GOOGLE_APP_ID</key>
-        <string>1:576444901873:ios:ac9247576c4a3dd7</string>
+		<key>AppID</key>
+		<string>6044011</string>
+		<key>CFBundleURLScheme</key>
+		<string>vk6044011</string>
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>vk</string>
+			<string>vk-share</string>
+			<string>vkauthorize</string>
+		</array>
 	</dict>
-    
-    
+	<key>MAGSocialGoogle</key>
+	<dict>
+		<key>CLIENT_ID</key>
+		<string>576444901873-ncv8mgsd7fkakock9d2j1l6mnk0l0dpo.apps.googleusercontent.com</string>
+		<key>REVERSED_CLIENT_ID</key>
+		<string>com.googleusercontent.apps.576444901873-ncv8mgsd7fkakock9d2j1l6mnk0l0dpo</string>
+		<key>PLIST_VERSION</key>
+		<string>1</string>
+		<key>BUNDLE_ID</key>
+		<string>org.cocoapods.demo.MAGSocial-Example</string>
+		<key>PROJECT_ID</key>
+		<string>project-5341242969335748028</string>
+		<key>IS_ADS_ENABLED</key>
+		<false/>
+		<key>IS_ANALYTICS_ENABLED</key>
+		<false/>
+		<key>IS_APPINVITE_ENABLED</key>
+		<false/>
+		<key>IS_GCM_ENABLED</key>
+		<false/>
+		<key>IS_SIGNIN_ENABLED</key>
+		<true/>
+		<key>GOOGLE_APP_ID</key>
+		<string>1:576444901873:ios:ac9247576c4a3dd7</string>
+		<key>CFBundleURLScheme</key>
+		<string>com.googleusercontent.apps.576444901873-ncv8mgsd7fkakock9d2j1l6mnk0l0dpo</string>
+	</dict>
 	<key>MAGSocialTwitter</key>
-    <dict>
-        <key>consumerKey</key>
-        <string>FHAGOsnVgJXwqaSnY3O5cCWIt</string>
-        <key>consumerSecret</key>
-        <string>DPo0KbG4WUgrQrNqkh1lgMSIeGPGs8KUoad7NlZpXndooA1I23</string>
-    </dict>
-    
+	<dict>
+		<key>consumerKey</key>
+		<string>FHAGOsnVgJXwqaSnY3O5cCWIt</string>
+		<key>consumerSecret</key>
+		<string>DPo0KbG4WUgrQrNqkh1lgMSIeGPGs8KUoad7NlZpXndooA1I23</string>
+		<key>CFBundleURLScheme</key>
+		<string>twitterkit-FHAGOsnVgJXwqaSnY3O5cCWIt</string>
+	</dict>
 </dict>
 </plist>
