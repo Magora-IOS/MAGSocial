@@ -7,8 +7,12 @@
 //
 
 #import "MAGSocialCommand.h"
+#import "MAGSocialAuth.h"
 
 
 @interface MAGSocialCommandAuth : NSObject <MAGSocialCommand>
+
+@property (nullable, nonatomic, weak) UIViewController *vc;
+@property (nullable, nonatomic, strong) MAGSocialAuth *result;
 
 @end

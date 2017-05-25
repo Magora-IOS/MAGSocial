@@ -28,12 +28,6 @@ freely, subject to the following restrictions:
 @interface MAGSocialTwitter: MAGSocialNetworkBase
 
 
-+ (BOOL)application:(UIApplication *)application
-    openURL:(NSURL *)url
-    options:(NSDictionary *)options;
-+ (void)authenticateWithParentVC:(UIViewController *)parentVC
-    success:(MAGSocialNetworkSuccessCallback)success
-    failure:(MAGSocialNetworkFailureCallback)failure;
 
 @end
 

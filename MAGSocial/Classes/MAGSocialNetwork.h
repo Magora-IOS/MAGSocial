@@ -6,38 +6,37 @@
 //
 //
 
-#ifndef MAGSocialNetwork_h
-#define MAGSocialNetwork_h
+
+
+
+#import <Foundation/Foundation.h>
+#import "MAGSocialAuth.h"
+#import "Constants.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
-
-typedef void (^MAGSocialNetworkSuccessCallback)();
-typedef void (^MAGSocialNetworkFailureCallback)(NSError * _Nullable error);
-
-
 
 
 @protocol MAGSocialNetwork <NSObject>
 
-
 @property (class, nonatomic, nonnull, readonly) NSString *moduleName;
 
-
+//MARK: - Setup
 + (void)configure;
 + (void)configureWithApplication:(nullable UIApplication *)application
                 andLaunchOptions:(nullable NSDictionary *)launchOptions;
 
 
-
+//MARK: - Actions
 + (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
             options:(NSDictionary *)options;
+
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
-                         success:(MAGSocialNetworkSuccessCallback)success
+                         success:(void(^)(MAGSocialAuth *data))success
                          failure:(MAGSocialNetworkFailureCallback)failure;
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#endif /* MAGSocialNetwork_h */

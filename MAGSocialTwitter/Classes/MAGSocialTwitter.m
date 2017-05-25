@@ -22,7 +22,7 @@ freely, subject to the following restrictions:
 */
 
 #import "MAGSocialTwitter.h"
-
+#import "MAGSocial.h"
 #import <Fabric/Fabric.h>
 #import <TwitterKit/TwitterKit.h>
 
@@ -41,12 +41,14 @@ freely, subject to the following restrictions:
 //MARK: - Configuration
 + (void)configureWithApplication:(UIApplication *)application
                 andLaunchOptions:(NSDictionary *)launchOptions {
-    //[Fabric with:@[Twitter.class]];
     NSDictionary *settings = [self settings];
     [[Twitter sharedInstance] startWithConsumerKey:settings[@"consumerKey"] consumerSecret:settings[@"consumerSecret"]];
 }
 
 
+
+
+//MARK: - Actions
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options {
@@ -57,20 +59,29 @@ freely, subject to the following restrictions:
 
 
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
-    success:(MAGSocialNetworkSuccessCallback)success
+    success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
 
     NSLog(@"%@. authenticate. VC: '%@'", self.moduleName, parentVC);
     [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
         if (session) {
             NSLog(@"%@. Successful authentication", self.moduleName);
-            success();
+            success([self createAuthResult:session]);
         } else {
             NSLog(@"%@. Could not authorize: '%@'", self.moduleName, error);
             failure(error);
         }
     }];
 }
+
+
+
++ (MAGSocialAuth *)createAuthResult:(TWTRSession *)raw {
+    MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
+    result.token = raw.authToken;
+    return result;
+}
+
 
 @end
 

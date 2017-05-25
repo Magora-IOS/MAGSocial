@@ -40,65 +40,49 @@ freely, subject to the following restrictions:
 @implementation MAGViewController
 
 #pragma mark - PUBLIC
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
 
-#pragma mark - PRIVATE
 
+
+#pragma mark - PRIVATE
 - (IBAction)authenticateFacebook:(id)sender {
-    NSLog(@"MAGViewController. Authenticate Facebook");
-    [MAGSocial
-        authenticateNetwork:[MAGSocialFacebook class]
-        withParentVC:self
-        success:^{
-            NSLog(@"MAGViewController. Successful Facebook authentication");
-        }
-        failure:^(NSError *error) {
-            NSLog(@"MAGViewController. Facebook authentication failed");
-        }];
+    [self authenticateNetwork:[MAGSocialFacebook class]];
 }
 
 - (IBAction)authenticateTwitter:(id)sender {
-    NSLog(@"MAGViewController. Authenticate Twitter");
-    [MAGSocial
-        authenticateNetwork:[MAGSocialTwitter class]
-        withParentVC:self
-        success:^{
-            NSLog(@"MAGViewController. Successful Twitter authentication");
-        }
-        failure:^(NSError *error) {
-            NSLog(@"MAGViewController. Twitter authentication failed");
-        }];
+    [self authenticateNetwork:[MAGSocialTwitter class]];
 }
 
 - (IBAction)authenticateGoogle:(id)sender {
-    NSLog(@"MAGViewController. Authenticate Google");
-    [MAGSocial
-     authenticateNetwork:[MAGSocialGoogle class]
-     withParentVC:self
-     success:^{
-         NSLog(@"MAGViewController. Successful Google authentication");
-     }
-     failure:^(NSError *error) {
-         NSLog(@"MAGViewController. Google authentication failed");
-     }];
+    [self authenticateNetwork:[MAGSocialGoogle class]];
 }
 
 
 - (IBAction)authenticateVK:(id)sender {
-    NSLog(@"MAGViewController. Authenticate Google");
-    [MAGSocial
-     authenticateNetwork:[MAGSocialVK class]
-     withParentVC:self
-     success:^{
-         NSLog(@"MAGViewController. Successful VK authentication");
-     }
-     failure:^(NSError *error) {
-         NSLog(@"MAGViewController. VK authentication failed");
-     }];
+    [self authenticateNetwork:[MAGSocialVK class]];
 }
+
+
+
+
+//MARK: - Routines
+- (void) authenticateNetwork:(_Nonnull Class<MAGSocialNetwork>)network {
+    NSLog(@"MAGViewController. Authenticate %@ started", [network moduleName]);
+    [MAGSocial authenticateNetwork:network
+                      withParentVC:self
+                           success:^(MAGSocialAuth * _Nonnull data) {
+        NSLog(@"MAGViewController. Successful %@ authentication", [network moduleName]);
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"token" message:data.token preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alert animated:true completion:nil];
+                    
+    } failure:^(NSError * _Nullable error) {
+        NSLog(@"MAGViewController. %@ authentication failed", [network moduleName]);
+    }];
+}
+
 
 @end
 

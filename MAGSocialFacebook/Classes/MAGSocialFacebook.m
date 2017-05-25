@@ -59,7 +59,6 @@ freely, subject to the following restrictions:
 
 
 
-
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options {
@@ -74,37 +73,41 @@ freely, subject to the following restrictions:
 }
 
 
+
+//MARK: - Actions
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
-    success:(MAGSocialNetworkSuccessCallback)success
+    success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
 
     NSLog(@"%@. authenticate. VC: '%@'", self.moduleName, parentVC);
     FBSDKLoginManager *lm = [FBSDKLoginManager new];
-    // TODO: Get permissions from outside.
-    NSArray *permissions = @[ @"public_profile" ];
-    [lm logInWithReadPermissions:permissions
+    
+    //TODO: Get permissions from outside.
+    [lm logInWithReadPermissions:@[ @"public_profile"]
         fromViewController:parentVC
         handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
             if (error)
             {
                 NSLog(@"%@. Could not authorize: '%@'", self.moduleName, error);
-                if (failure) {
-                    failure(error);
-                }
+                failure(error);
             }
             else if (result.isCancelled) {
                 NSLog(@"%@. User cancelled authentication", self.moduleName);
             }
             else {
-                if (success) {
-                    success();
-                }
+                success([self createAuthResult:result]);
                 NSLog(@"%@. Successful authentication", self.moduleName);
             }
-
-
         }];
 }
+
+
++ (MAGSocialAuth *)createAuthResult:(FBSDKLoginManagerLoginResult *)raw {
+    MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
+    result.token = raw.token.tokenString;
+    return result;
+}
+
 
 @end
 

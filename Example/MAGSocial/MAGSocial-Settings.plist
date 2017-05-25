@@ -5,11 +5,11 @@
 	<key>MAGSocialFacebook</key>
 	<dict>
 		<key>FacebookAppID</key>
-		<string>676722582529525</string>
+		<string>1664459937173690</string>
 		<key>FacebookDisplayName</key>
 		<string>MAGSocial</string>
 		<key>CFBundleURLScheme</key>
-		<string>fb676722582529525</string>
+		<string>fb1664459937173690</string>
 		<key>LSApplicationQueriesSchemes</key>
 		<array>
 			<string>fbapi</string>

@@ -23,6 +23,8 @@ freely, subject to the following restrictions:
 
 #import "MAGSocial.h"
 #import "MAGSocialSettings.h"
+#import "MAGSocialCommandAuth.h"
+
 
 static NSMutableArray<Class<MAGSocialNetwork>> *magSocialNetworks;
 
@@ -104,13 +106,17 @@ static NSMutableArray<Class<MAGSocialNetwork>> *magSocialNetworks;
 
 + (void)authenticateNetwork:(Class<MAGSocialNetwork>)networkClass
     withParentVC:(UIViewController *)parentVC
-    success:(MAGSocialNetworkSuccessCallback)success
+    success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
 
-    [networkClass
-        authenticateWithParentVC:parentVC
-        success:success
-        failure:failure];
+    MAGSocialCommandAuth *command = [[MAGSocialCommandAuth alloc] initWith:networkClass];
+    command.vc = parentVC;
+    [command executeWithSuccess:^{
+        success(command.result);
+    }
+                        failure:^(NSError * _Nullable error) {
+        failure(error);
+    }];
 }
 
 

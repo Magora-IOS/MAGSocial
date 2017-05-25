@@ -29,7 +29,7 @@ freely, subject to the following restrictions:
 @interface MAGSocialGoogle () <GIDSignInDelegate, GIDSignInUIDelegate>
 
 @property (nullable, nonatomic, weak) UIViewController *parentVC;
-@property (nonatomic, strong) MAGSocialNetworkSuccessCallback success;
+@property (nonatomic, strong) void(^authSuccess)(MAGSocialAuth *data);
 @property (nonatomic, strong) MAGSocialNetworkFailureCallback failure;
 
 @end
@@ -75,8 +75,6 @@ freely, subject to the following restrictions:
 
 
 
-
-
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options {
@@ -88,12 +86,15 @@ freely, subject to the following restrictions:
     return handled;
 }
 
+
+
+//MARK: - Auth
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
-    success:(MAGSocialNetworkSuccessCallback)success
-    failure:(MAGSocialNetworkFailureCallback)failure {
+                         success:(void(^)(MAGSocialAuth *data))success
+                         failure:(MAGSocialNetworkFailureCallback)failure {
 
     [self sharedInstance].parentVC = parentVC;
-    [self sharedInstance].success = success;
+    [self sharedInstance].authSuccess = success;
     [self sharedInstance].failure = failure;
     
     NSLog(@"%@. authenticate. VC: '%@'", self.moduleName, parentVC);
@@ -103,7 +104,7 @@ freely, subject to the following restrictions:
 
 
 
-//MARK: - GIDSignInDelegate
+//MARK: - GIDSignInDelegate, GIDSignInUIDelegate
 - (void)signIn:(GIDSignIn *)signIn
 didSignInForUser:(GIDGoogleUser *)user
     withError:(NSError *)error {
@@ -113,24 +114,25 @@ didSignInForUser:(GIDGoogleUser *)user
         self.failure(error);
     }
     else {
-        self.success();
+        self.authSuccess([self.class createAuthResult:user]);
         NSLog(@"%@. Successful authentication", self.class.moduleName);
     }
 }
 
 
++ (MAGSocialAuth *) createAuthResult:(GIDGoogleUser *)raw {
+    MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
+    result.token = raw.authentication.accessToken;
+    return result;
+}
 
 
-
-
-//MARK: - GIDSignInUIDelegate
-// Present a view that prompts the user to sign in with Google
 - (void)signIn:(GIDSignIn *)signIn
 presentViewController:(UIViewController *)viewController {
     [self.parentVC presentViewController:viewController animated:YES completion:nil];
 }
 
-// Dismiss the "Sign in with Google" view
+
 - (void)signIn:(GIDSignIn *)signIn
 dismissViewController:(UIViewController *)viewController {
     [self.parentVC dismissViewControllerAnimated:YES completion:nil];

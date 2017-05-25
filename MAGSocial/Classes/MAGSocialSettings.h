@@ -6,8 +6,6 @@
 //
 //
 
-#ifndef MAGSocialSettings_h
-#define MAGSocialSettings_h
 
 
 #import <Foundation/Foundation.h>
@@ -22,4 +20,4 @@
 
 
 
-#endif /* MAGSocialSettings_h */
+

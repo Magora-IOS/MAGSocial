@@ -14,7 +14,7 @@
 @implementation MAGSocialNetworkBase
 
 
-//MARK: - Configuration
+//MARK: - Setup
 + (void)configure {
     [self configureWithApplication:nil andLaunchOptions:nil];
 }
@@ -24,6 +24,7 @@
                 andLaunchOptions:(nullable NSDictionary *)launchOptions {
     NSAssert(false, @"Should be implemented in subclasses");
 }
+
 
 
 
@@ -50,7 +51,7 @@
 
 
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
-                         success:(MAGSocialNetworkSuccessCallback)success
+                         success:(void(^)(MAGSocialAuth *data))success
                          failure:(MAGSocialNetworkFailureCallback)failure {
     NSAssert(false, @"Should be implemented in subclasses");
 }

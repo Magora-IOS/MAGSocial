@@ -21,10 +21,18 @@ freely, subject to the following restrictions:
 
 */
 
-#include "MAGSocialNetwork.h"
+
+
+#import <Foundation/Foundation.h>
+#import "MAGSocialNetwork.h"
+#import "Constants.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+
+
+
 @interface MAGSocial: NSObject
 
 //MARK: - Configuration
@@ -35,14 +43,17 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSDictionary *) settingsPlist;
 
 
+
+//MARK: - Actions
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options;
 
 + (void)authenticateNetwork:(Class<MAGSocialNetwork>)networkClass
-    withParentVC:(UIViewController *)parentVC
-    success:(MAGSocialNetworkSuccessCallback)success
-    failure:(MAGSocialNetworkFailureCallback)failure;
+               withParentVC:(UIViewController *)parentVC
+                    success:(void(^)(MAGSocialAuth *data))success
+                    failure:(MAGSocialNetworkFailureCallback)failure;
+
 
 @end
 NS_ASSUME_NONNULL_END

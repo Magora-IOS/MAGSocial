@@ -29,7 +29,7 @@ freely, subject to the following restrictions:
 @interface MAGSocialVK () <VKSdkDelegate, VKSdkUIDelegate>
 
 @property (nullable, nonatomic, weak) UIViewController *parentVC;
-@property (nonatomic, strong) MAGSocialNetworkSuccessCallback success;
+@property (nonatomic, strong) void(^authSuccess)(MAGSocialAuth *data);
 @property (nonatomic, strong) MAGSocialNetworkFailureCallback failure;
 
 @end
@@ -66,7 +66,7 @@ freely, subject to the following restrictions:
 
 
 
-
+//MARK: - Actions
 + (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options {
@@ -77,11 +77,11 @@ freely, subject to the following restrictions:
 
 
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
-    success:(MAGSocialNetworkSuccessCallback)success
+    success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
 
     [self sharedInstance].parentVC = parentVC;
-    [self sharedInstance].success = success;
+    [self sharedInstance].authSuccess = success;
     [self sharedInstance].failure = failure;
     
     NSLog(@"%@. authenticate. VC: '%@'", self.moduleName, parentVC);
@@ -89,12 +89,17 @@ freely, subject to the following restrictions:
 }
 
 
++ (MAGSocialAuth *)createAuthResult:(VKAuthorizationResult *)raw {
+    MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
+    result.token = raw.token.accessToken;
+    return result;
+}
 
 
-//MARK: - VKSdkDelegate
+//MARK: - VKSdkDelegate, VKSdkUIDelegate
 - (void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result {
     if (result.token) {
-        self.success();
+        self.authSuccess([self.class createAuthResult:result]);
         NSLog(@"%@. Successful authentication", self.class.moduleName);
     } else if (result.error) {
         NSLog(@"%@. Could not authorize: '%@'", self.class.moduleName, result.error);
@@ -102,21 +107,16 @@ freely, subject to the following restrictions:
     }
 }
 
+
 - (void)vkSdkUserAuthorizationFailed {
     NSLog(@"%@. Could not authorize", self.class.moduleName);
     self.failure(nil);
 }
 
 
-
-
-//MARK: - VKSdkUIDelegate
 - (void)vkSdkShouldPresentViewController:(UIViewController *)controller {
     [self.parentVC presentViewController:controller animated:YES completion:nil];
 }
-
-
-
 
 
 - (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError {
