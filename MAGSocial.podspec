@@ -36,7 +36,4 @@ Supported social networks and their features: TODO
   s.user_target_xcconfig = { 'MAGSocialPlistSettingsFileName' => 'MAGSocial-Settings.plist' }
 
 
-  # s.public_header_files = 'MAGSocial/Classes/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-
 end

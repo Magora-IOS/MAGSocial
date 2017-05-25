@@ -406,7 +406,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#local podspec\n\"${PROJECT_DIR}/../MAGSocial/ConfigureMainPlist.sh\" \"${PROJECT_DIR}\" \"${PROJECT_NAME}\" \"${MAGSocialPlistSettingsFileName}\" \"${INFOPLIST_FILE}\"\n#OR\n#git podspec\n#\"${PODS_ROOT}/MAGSocial/ConfigureMainPlist.sh\" \"${PROJECT_DIR}\" \"${PROJECT_NAME}\" \"${MAGSocialPlistSettingsFileName}\" \"${INFOPLIST_FILE}\"";
+			shellScript = "#local podspec\n\"${PROJECT_DIR}/../MAGSocial/ConfigureMainPlist.sh\" \"${PROJECT_DIR}\" \"${PROJECT_NAME}\" \"${MAGSocialPlistSettingsFileName}\" \"${INFOPLIST_FILE}\"\n#OR\n#git podspec\n#\"${PODS_ROOT}/MAGSocial/MAGSocial/ConfigureMainPlist.sh\" \"${PROJECT_DIR}\" \"${PROJECT_NAME}\" \"${MAGSocialPlistSettingsFileName}\" \"${INFOPLIST_FILE}\"";
 			showEnvVarsInLog = 0;
 		};
 		D831BC1A807F38D4ACBBDB58 /* [CP] Copy Pods Resources */ = {
