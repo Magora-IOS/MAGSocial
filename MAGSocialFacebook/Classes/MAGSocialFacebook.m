@@ -83,7 +83,7 @@ freely, subject to the following restrictions:
     FBSDKLoginManager *lm = [FBSDKLoginManager new];
     
     //TODO: Get permissions from outside.
-    [lm logInWithReadPermissions:@[ @"public_profile"]
+    [lm logInWithReadPermissions:@[@"public_profile", @"email"]
         fromViewController:parentVC
         handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
             if (error)

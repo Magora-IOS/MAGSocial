@@ -16,16 +16,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+
 @protocol MAGSocialCommand <NSObject>
 
+//MARK: - Convenience
 - (instancetype) initWith:(Class<MAGSocialNetwork>)network;
 
-@property (nonatomic, strong) Class<MAGSocialNetwork> network;
 
+//MARK: - Interface
+@property (nonatomic, strong) Class<MAGSocialNetwork> network;
 - (void) executeWithSuccess:(MAGSocialNetworkSuccessCallback)success
                     failure:(MAGSocialNetworkFailureCallback)failure;
 
 @end
+
 
 
 NS_ASSUME_NONNULL_END

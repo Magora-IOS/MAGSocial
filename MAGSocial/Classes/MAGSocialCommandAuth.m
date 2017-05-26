@@ -11,14 +11,6 @@
 
 
 @implementation MAGSocialCommandAuth
-@synthesize network;
-
-
-- (instancetype) initWith:(Class<MAGSocialNetwork>)paramNetwork {
-    self = [self init];
-    self.network = paramNetwork;
-    return self;
-}
 
 
 - (void) executeWithSuccess:(MAGSocialNetworkSuccessCallback)success

@@ -6,11 +6,11 @@
 //
 //
 
-#import "MAGSocialCommand.h"
+#import "MAGSocialCommandBase.h"
 #import "MAGSocialAuth.h"
 
 
-@interface MAGSocialCommandAuth : NSObject <MAGSocialCommand>
+@interface MAGSocialCommandAuth : MAGSocialCommandBase
 
 @property (nullable, nonatomic, weak) UIViewController *vc;
 @property (nullable, nonatomic, strong) MAGSocialAuth *result;
