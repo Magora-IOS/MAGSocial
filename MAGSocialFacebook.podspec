@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MAGSocialFacebook'
-  s.version          = '0.0.4'
+  s.version          = '0.0.5'
   s.summary          = 'MAGSocialFacebook is a custom API for Facebook'
 
 # This description is used to generate tags and improve search results.

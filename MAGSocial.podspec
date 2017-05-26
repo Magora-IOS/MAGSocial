@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MAGSocial'
-  s.version          = '0.0.4'
+  s.version          = '0.0.5'
   s.summary          = 'MAGSocial is a unified API for common and specific social network features'
 
 # This description is used to generate tags and improve search results.

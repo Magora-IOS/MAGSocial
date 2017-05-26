@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MAGSocialVK'
-  s.version          = '0.0.4'
+  s.version          = '0.0.5'
   s.summary          = 'MAGSocialVK is a custom API for VK'
 
 # This description is used to generate tags and improve search results.
