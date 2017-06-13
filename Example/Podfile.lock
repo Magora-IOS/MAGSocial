@@ -5,10 +5,9 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Fabric (1.6.11)
-  - FBSDKCoreKit (4.22.0):
+  - FBSDKCoreKit (4.23.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.22.0):
+  - FBSDKLoginKit (4.23.0):
     - FBSDKCoreKit
   - FirebaseAnalytics (3.9.0):
     - FirebaseCore (~> 3.6)
@@ -18,9 +17,9 @@ PODS:
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.10):
     - FirebaseCore (~> 3.6)
-  - Google/Core (3.0.3):
+  - Google/Core (3.1.0):
     - FirebaseAnalytics (~> 3.2)
-  - Google/SignIn (3.0.3):
+  - Google/SignIn (3.1.0):
     - Google/Core
     - GoogleSignIn (~> 4.0)
   - GoogleSignIn (4.0.2):
@@ -45,23 +44,22 @@ PODS:
   - GTMSessionFetcher/Core (1.1.10)
   - GTMSessionFetcher/Full (1.1.10):
     - GTMSessionFetcher/Core (= 1.1.10)
-  - MAGSocial (0.0.4)
-  - MAGSocialFacebook (0.0.4):
+  - MAGSocial (0.0.5)
+  - MAGSocialFacebook (0.0.5):
     - FBSDKCoreKit (~> 4)
     - FBSDKLoginKit (~> 4)
     - MAGSocial
-  - MAGSocialGoogle (0.0.4):
+  - MAGSocialGoogle (0.0.5):
     - Google/SignIn
-  - MAGSocialTwitter (0.0.4):
+  - MAGSocialTwitter (0.0.6):
     - MAGSocial
-    - TwitterKit (~> 2)
-  - MAGSocialVK (0.0.4):
+    - TwitterKit
+  - MAGSocialVK (0.0.5):
     - MAGSocial
     - VK-ios-sdk
-  - TwitterCore (2.8.0):
-    - Fabric
-  - TwitterKit (2.8.1):
-    - TwitterCore (>= 2.8)
+  - TwitterCore (3.0.0)
+  - TwitterKit (3.0.3):
+    - TwitterCore (>= 3.0.0)
   - VK-ios-sdk (1.4.6)
 
 DEPENDENCIES:
@@ -73,38 +71,37 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   MAGSocial:
-    :path: "../"
+    :path: ../
   MAGSocialFacebook:
-    :path: "../"
+    :path: ../
   MAGSocialGoogle:
-    :path: "../"
+    :path: ../
   MAGSocialTwitter:
-    :path: "../"
+    :path: ../
   MAGSocialVK:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  FBSDKCoreKit: c693bad19feb225469eeff14452ba364522ee48b
-  FBSDKLoginKit: 1fa529fc622d7b32ebeaffbecd377180833c6d30
+  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
+  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
   FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
-  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
+  Google: 98da4b1a60ed0beb80a290387a28333406a1eb90
   GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
-  MAGSocial: e43908c1911145e15d2c9d7e877bf638961357a5
-  MAGSocialFacebook: 3ed970b80921f59c2e35b43a751b08710cc48b9c
-  MAGSocialGoogle: d55fd63d0c535ef275710f8f90a8b612d4b7bb35
-  MAGSocialTwitter: 862dbb7dd1ccafdac54b3f42cc171f71cdea775b
-  MAGSocialVK: e4fa38940dfea60d716ef9d57413927a9402ae6a
-  TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
-  TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
+  MAGSocial: d7354d1d113a6749513ff97459ebd06ffa67ae31
+  MAGSocialFacebook: 25f57315c16058bbeb6376a5c0c8bc461a628277
+  MAGSocialGoogle: dc30db8dac8fc0e5e18b534392405646dc8187e5
+  MAGSocialTwitter: bf53b1de08f9f88b93a966a42ce326cd3b6945b8
+  MAGSocialVK: ccf3a502eeb26300cf1cd86a51d875680a5ebae6
+  TwitterCore: 8ce250be1eb34633a0e6acc89520d4165ec52c10
+  TwitterKit: 202404be71aadd81d19f677b34579fe77d9cb67e
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
 
 PODFILE CHECKSUM: 8bd4a0cd867e831f549080ef4aea51e859e64e85
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1

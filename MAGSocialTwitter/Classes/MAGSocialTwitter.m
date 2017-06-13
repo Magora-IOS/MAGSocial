@@ -24,7 +24,6 @@ freely, subject to the following restrictions:
 #import "MAGSocialTwitter.h"
 #import "MAGSocial.h"
 #import "MAGSocialUser.h"
-#import <Fabric/Fabric.h>
 #import <TwitterKit/TwitterKit.h>
 
 

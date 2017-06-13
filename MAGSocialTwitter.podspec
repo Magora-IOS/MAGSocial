@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MAGSocialTwitter'
-  s.version          = '0.0.5'
+  s.version          = '0.0.6'
   s.summary          = 'MAGSocialTwitter is a custom API for Twitter'
 
 # This description is used to generate tags and improve search results.
@@ -40,5 +40,5 @@ Supported features: TODO
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'MAGSocial'
-  s.dependency 'TwitterKit', '~> 2'
+  s.dependency 'TwitterKit'
 end
