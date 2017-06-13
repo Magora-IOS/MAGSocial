@@ -38,6 +38,10 @@
     return NSStringFromClass(self);
 }
 
+- (nonnull NSString *) moduleName {
+    return NSStringFromClass([self class]);
+}
+
 
 
 
@@ -53,6 +57,11 @@
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
                          success:(void(^)(MAGSocialAuth *data))success
                          failure:(MAGSocialNetworkFailureCallback)failure {
+    NSAssert(false, @"Should be implemented in subclasses");
+}
+
+
++ (void)loadMyProfile:(void (^)(MAGSocialUser * _Nonnull))success failure:(MAGSocialNetworkFailureCallback)failure {
     NSAssert(false, @"Should be implemented in subclasses");
 }
 

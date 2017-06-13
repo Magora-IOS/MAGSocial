@@ -86,8 +86,7 @@ freely, subject to the following restrictions:
     [lm logInWithReadPermissions:@[@"public_profile", @"email"]
         fromViewController:parentVC
         handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-            if (error)
-            {
+            if (error) {
                 NSLog(@"%@. Could not authorize: '%@'", self.moduleName, error);
                 failure(error);
             }
@@ -99,6 +98,34 @@ freely, subject to the following restrictions:
                 NSLog(@"%@. Successful authentication", self.moduleName);
             }
         }];
+}
+
+
++ (void)loadMyProfile:(void(^)(MAGSocialUser *user))success failure:(MAGSocialNetworkFailureCallback)failure {
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
+                                                                   parameters:@{@"fields": @"name, first_name, last_name, email, gender, id"}];
+    
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if (error) {
+            NSLog(@"%@. Could not get profile: '%@'", self.moduleName, error);
+            failure(error);
+            
+        } else {
+            NSLog(@"%@. User cancelled request", self.moduleName);
+            MAGSocialUser *user = [self createUserWithDictionary:result];
+            success(user);
+        }
+    }];
+}
+
+
++ (MAGSocialUser *)createUserWithDictionary:(NSDictionary *)data {
+    MAGSocialUser *result = [[MAGSocialUser alloc] initWith:data];
+    result.objectID = data[@"id"];
+    result.email = data[@"email"];
+    result.name = data[@"name"];
+    //...
+    return result;
 }
 
 

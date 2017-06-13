@@ -24,6 +24,7 @@ freely, subject to the following restrictions:
 #import "MAGSocial.h"
 #import "MAGSocialSettings.h"
 #import "MAGSocialCommandAuth.h"
+#import "MAGSocialCommandProfile.h"
 
 
 static NSMutableArray<Class<MAGSocialNetwork>> *magSocialNetworks;
@@ -120,7 +121,18 @@ static NSMutableArray<Class<MAGSocialNetwork>> *magSocialNetworks;
 }
 
 
-
++ (void)loadMyProfile:(Class<MAGSocialNetwork>)networkClass
+              success:(void(^)(MAGSocialUser *data))success
+              failure:(MAGSocialNetworkFailureCallback)failure {
+    
+    MAGSocialCommandProfile *command = [[MAGSocialCommandProfile alloc] initWith:networkClass];
+    [command executeWithSuccess:^{
+        success(command.result);
+        
+    } failure:^(NSError * _Nullable error) {
+        failure(error);
+    }];
+}
 
          
 #pragma mark - PRIVATE

@@ -16,6 +16,7 @@
 @interface MAGSocialNetworkBase: NSObject <MAGSocialNetwork>
 
 + (nullable NSDictionary *) settings;
+- (nonnull NSString *) moduleName;
 
 
 @end

@@ -54,6 +54,10 @@ NS_ASSUME_NONNULL_BEGIN
                     success:(void(^)(MAGSocialAuth *data))success
                     failure:(MAGSocialNetworkFailureCallback)failure;
 
++ (void)loadMyProfile:(Class<MAGSocialNetwork>)networkClass
+              success:(void(^)(MAGSocialUser *data))success
+              failure:(MAGSocialNetworkFailureCallback)failure;
+
 
 @end
 NS_ASSUME_NONNULL_END

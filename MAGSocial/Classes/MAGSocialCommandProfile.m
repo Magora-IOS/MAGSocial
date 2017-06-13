@@ -10,4 +10,16 @@
 
 @implementation MAGSocialCommandProfile
 
+- (void)executeWithSuccess:(MAGSocialNetworkSuccessCallback)success
+                   failure:(MAGSocialNetworkFailureCallback)failure {
+    
+    [self.network loadMyProfile:^(MAGSocialUser *user) {
+        self.result = user;
+        success();
+        
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
 @end

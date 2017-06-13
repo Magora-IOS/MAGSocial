@@ -11,6 +11,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MAGSocialAuth.h"
+#import "MAGSocialUser.h"
 #import "Constants.h"
 
 
@@ -35,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)authenticateWithParentVC:(UIViewController *)parentVC
                          success:(void(^)(MAGSocialAuth *data))success
                          failure:(MAGSocialNetworkFailureCallback)failure;
+
++ (void)loadMyProfile:(void(^)(MAGSocialUser *user))success failure:(MAGSocialNetworkFailureCallback)failure;
 
 @end
 

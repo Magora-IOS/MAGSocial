@@ -59,9 +59,13 @@ freely, subject to the following restrictions:
     [self authenticateNetwork:[MAGSocialGoogle class]];
 }
 
-
 - (IBAction)authenticateVK:(id)sender {
     [self authenticateNetwork:[MAGSocialVK class]];
+}
+
+
+- (IBAction)profileFacebookAction:(id)sender {
+    [self loadMyProfileWithNetwork:[MAGSocialFacebook class]];
 }
 
 
@@ -73,16 +77,36 @@ freely, subject to the following restrictions:
     [MAGSocial authenticateNetwork:network
                       withParentVC:self
                            success:^(MAGSocialAuth * _Nonnull data) {
+                               
         NSLog(@"MAGViewController. Successful %@ authentication", [network moduleName]);
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Result"
-                                                                       message:[NSString stringWithFormat:@"%@\n\n%@", data, data.userData]
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-        [self presentViewController:alert animated:true completion:nil];
+                               NSString *message = [NSString stringWithFormat:@"%@\n\n%@", data, data.userData];
+                               [self showResultMessage:message];
                     
     } failure:^(NSError * _Nullable error) {
         NSLog(@"MAGViewController. %@ authentication failed", [network moduleName]);
     }];
+}
+
+
+- (void)loadMyProfileWithNetwork:(_Nonnull Class<MAGSocialNetwork>)network {
+    
+    [MAGSocial loadMyProfile:network success:^(MAGSocialUser * _Nonnull data) {
+        NSString *message = [NSString stringWithFormat:@"%@\n\n%@", data, data.objectID];
+        [self showResultMessage:message];
+        
+    } failure:^(NSError * _Nullable error) {
+        NSLog(@"MAGViewController. %@ authentication failed", [network moduleName]);
+    }];
+}
+
+
+- (void)showResultMessage:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Result"
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    
+    [self presentViewController:alert animated:true completion:nil];
 }
 
 
