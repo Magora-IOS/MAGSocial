@@ -39,7 +39,7 @@ freely, subject to the following restrictions:
 
 
 //MARK: - Configuration
-+ (void)configureWithApplication:(UIApplication *)application
+- (void)configureWithApplication:(UIApplication *)application
                 andLaunchOptions:(NSDictionary *)launchOptions {
     [[self settings] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL* stop) {
         if ([key isEqual: @"FacebookAppID"]) {
@@ -59,7 +59,7 @@ freely, subject to the following restrictions:
 
 
 
-+ (BOOL)application:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options {
 
@@ -75,7 +75,7 @@ freely, subject to the following restrictions:
 
 
 //MARK: - Actions
-+ (void)authenticateWithParentVC:(UIViewController *)parentVC
+- (void)authenticateWithParentVC:(UIViewController *)parentVC
     success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
 
@@ -101,7 +101,7 @@ freely, subject to the following restrictions:
 }
 
 
-+ (void)loadMyProfile:(void(^)(MAGSocialUser *user))success failure:(MAGSocialNetworkFailureCallback)failure {
+- (void)loadMyProfile:(void(^)(MAGSocialUser *user))success failure:(MAGSocialNetworkFailureCallback)failure {
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
                                                                    parameters:@{@"fields": @"name, first_name, last_name, email, gender, id, picture.width(1080).height(1080)"}];
     
@@ -119,7 +119,7 @@ freely, subject to the following restrictions:
 }
 
 
-+ (MAGSocialUser *)createUserWithDictionary:(NSDictionary *)data {
+- (MAGSocialUser *)createUserWithDictionary:(NSDictionary *)data {
     MAGSocialUser *result = [[MAGSocialUser alloc] initWith:data];
     result.objectID = data[@"id"];
     result.email = data[@"email"];
@@ -133,7 +133,7 @@ freely, subject to the following restrictions:
 }
 
 
-+ (MAGSocialAuth *)createAuth:(FBSDKLoginManagerLoginResult *)raw {
+- (MAGSocialAuth *)createAuth:(FBSDKLoginManagerLoginResult *)raw {
     MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
     result.token = raw.token.tokenString;
     result.userData = [self createUser:raw];
@@ -141,7 +141,7 @@ freely, subject to the following restrictions:
 }
 
 
-+ (MAGSocialUser *)createUser:(FBSDKLoginManagerLoginResult *)raw {
+- (MAGSocialUser *)createUser:(FBSDKLoginManagerLoginResult *)raw {
     MAGSocialUser *result = [[MAGSocialUser alloc] initWith:raw];
     result.objectID = raw.token.userID;
     return result;

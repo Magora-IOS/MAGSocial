@@ -41,18 +41,18 @@ freely, subject to the following restrictions:
 
 
 //MARK: - Lifecycle
-+ (MAGSocialVK*)sharedInstance {
+/*+ (MAGSocialVK*)sharedInstance {
     static MAGSocialVK *sharedInstance = nil;
     @synchronized(self) {
         if (sharedInstance == nil)
             sharedInstance = [[self alloc] init];
     }
     return sharedInstance;
-}
+}*/
 
 
 //MARK: - Configuration
-+ (void)configureWithApplication:(UIApplication *)application
+- (void)configureWithApplication:(UIApplication *)application
                 andLaunchOptions:(NSDictionary *)launchOptions {
     [[self settings] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL* stop) {
         if ([key isEqual: @"AppID"]) {
@@ -60,15 +60,15 @@ freely, subject to the following restrictions:
         }
     }];
     
-    VKSdk.instance.uiDelegate = [self sharedInstance];
-    [VKSdk.instance registerDelegate:[self sharedInstance]];
+    VKSdk.instance.uiDelegate = self;
+    [VKSdk.instance registerDelegate:self];
 }
 
 
 
 
 //MARK: - Actions
-+ (BOOL)application:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options {
 
@@ -77,13 +77,13 @@ freely, subject to the following restrictions:
 }
 
 
-+ (void)authenticateWithParentVC:(UIViewController *)parentVC
+- (void)authenticateWithParentVC:(UIViewController *)parentVC
     success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
 
-    [self sharedInstance].parentVC = parentVC;
-    [self sharedInstance].authSuccess = success;
-    [self sharedInstance].failure = failure;
+    self.parentVC = parentVC;
+    self.authSuccess = success;
+    self.failure = failure;
     
     NSLog(@"%@ authenticate", self.moduleName);
     if ( [VKSdk isLoggedIn] ) {
@@ -97,16 +97,16 @@ freely, subject to the following restrictions:
     if (result.token) {
         [self.parentVC dismissViewControllerAnimated:true completion:nil];
         self.authSuccess([self.class createAuth:result]);
-        NSLog(@"%@. Successful authentication", self.class.moduleName);
+        NSLog(@"%@. Successful authentication", self.moduleName);
     } else if (result.error) {
-        NSLog(@"%@. Could not authorize: '%@'", self.class.moduleName, result.error);
+        NSLog(@"%@. Could not authorize: '%@'", self.moduleName, result.error);
         self.failure(result.error);
     }
 }
 
 
 - (void)vkSdkUserAuthorizationFailed {
-    NSLog(@"%@. Could not authorize", self.class.moduleName);
+    NSLog(@"%@. Could not authorize", self.moduleName);
     self.failure(nil);
 }
 
@@ -121,7 +121,7 @@ freely, subject to the following restrictions:
 }
 
 
-+ (MAGSocialAuth *)createAuth:(VKAuthorizationResult *)raw {
+- (MAGSocialAuth *)createAuth:(VKAuthorizationResult *)raw {
     MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
     result.token = raw.token.accessToken;
     result.userData = [self createUser:raw.user];
@@ -129,7 +129,7 @@ freely, subject to the following restrictions:
 }
 
 
-+ (MAGSocialUser *) createUser:(VKUser *)raw {
+- (MAGSocialUser *) createUser:(VKUser *)raw {
     MAGSocialUser *result = [[MAGSocialUser alloc] initWith:raw];
     result.objectID = raw.id.stringValue;
     result.name = [NSString stringWithFormat:@"%@ %@", raw.first_name, raw.last_name];

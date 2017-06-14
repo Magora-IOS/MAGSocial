@@ -35,16 +35,14 @@ freely, subject to the following restrictions:
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     // Register networks.
-    [MAGSocial registerNetwork:[MAGSocialFacebook class]];
-    [MAGSocial registerNetwork:[MAGSocialTwitter class]];
-    [MAGSocial registerNetwork:[MAGSocialGoogle class]];
-    [MAGSocial registerNetwork:[MAGSocialVK class]];
+    [MAGSocial.sharedInstance registerNetwork:[MAGSocialFacebook class]];
+    [MAGSocial.sharedInstance registerNetwork:[MAGSocialTwitter class]];
+    [MAGSocial.sharedInstance registerNetwork:[MAGSocialGoogle class]];
+    [MAGSocial.sharedInstance registerNetwork:[MAGSocialVK class]];
     // Produces error in logs.
-    [MAGSocial registerNetwork:[self class]];
+    [MAGSocial.sharedInstance registerNetwork:[self class]];
 
-    [MAGSocial
-        application:application
-        didFinishLaunchingWithOptions:launchOptions];
+    [MAGSocial.sharedInstance application:application didFinishLaunchingWithOptions:launchOptions];
     return YES;
 }
 
@@ -52,11 +50,7 @@ freely, subject to the following restrictions:
     openURL:(NSURL *)url
     options:(NSDictionary *)options {
 
-    return
-        [MAGSocial
-            application:application
-            openURL:url
-            options:options];
+    return [MAGSocial.sharedInstance application:application openURL:url options:options];
 }
 
 @end

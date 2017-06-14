@@ -39,7 +39,7 @@ freely, subject to the following restrictions:
 
 
 //MARK: - Configuration
-+ (void)configureWithApplication:(UIApplication *)application
+- (void)configureWithApplication:(UIApplication *)application
                 andLaunchOptions:(NSDictionary *)launchOptions {
     NSDictionary *settings = [self settings];
     [[Twitter sharedInstance] startWithConsumerKey:settings[@"consumerKey"] consumerSecret:settings[@"consumerSecret"]];
@@ -49,7 +49,7 @@ freely, subject to the following restrictions:
 
 
 //MARK: - Actions
-+ (BOOL)application:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options {
 
@@ -58,7 +58,7 @@ freely, subject to the following restrictions:
 }
 
 
-+ (void)authenticateWithParentVC:(UIViewController *)parentVC
+- (void)authenticateWithParentVC:(UIViewController *)parentVC
     success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
 
@@ -76,7 +76,7 @@ freely, subject to the following restrictions:
 
 
 
-+ (MAGSocialAuth *)createAuth:(TWTRSession *)raw {
+- (MAGSocialAuth *)createAuth:(TWTRSession *)raw {
     MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
     result.token = raw.authToken;
     result.userData = [self createUser:raw];
@@ -84,7 +84,7 @@ freely, subject to the following restrictions:
 }
 
 
-+ (MAGSocialUser *) createUser:(TWTRSession *)raw {
+- (MAGSocialUser *) createUser:(TWTRSession *)raw {
     MAGSocialUser *result = [[MAGSocialUser alloc] initWith:raw];
     result.objectID = raw.userID;
     result.name = raw.userName;

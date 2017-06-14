@@ -24,7 +24,7 @@ freely, subject to the following restrictions:
 
 
 #import <Foundation/Foundation.h>
-#import "MAGSocialNetwork.h"
+#import "MAGSocialNetworkBase.h"
 #import "Constants.h"
 
 
@@ -35,26 +35,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MAGSocial: NSObject
 
++ (MAGSocial *)sharedInstance;
+
 //MARK: - Configuration
-+ (void)registerNetwork:(Class<MAGSocialNetwork>)networkClass;
-+ (void)application:(UIApplication *)application
+- (void)registerNetwork:(Class<MAGSocialNetwork>)networkClass;
+- (void)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 
-+ (nullable NSDictionary *) settingsPlist;
+- (nullable NSDictionary *) settingsPlist;
 
 
 
 //MARK: - Actions
-+ (BOOL)application:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options;
 
-+ (void)authenticateNetwork:(Class<MAGSocialNetwork>)networkClass
+- (void)authenticateNetwork:(Class<MAGSocialNetwork>)networkClass
                withParentVC:(UIViewController *)parentVC
                     success:(void(^)(MAGSocialAuth *data))success
                     failure:(MAGSocialNetworkFailureCallback)failure;
 
-+ (void)loadMyProfile:(Class<MAGSocialNetwork>)networkClass
+- (void)loadMyProfile:(Class<MAGSocialNetwork>)networkClass
               success:(void(^)(MAGSocialUser *data))success
               failure:(MAGSocialNetworkFailureCallback)failure;
 

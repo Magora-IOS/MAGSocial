@@ -20,24 +20,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol MAGSocialNetwork <NSObject>
 
-@property (class, nonatomic, nonnull, readonly) NSString *moduleName;
+@property (nonatomic, nonnull, readonly) NSString *moduleName;
 
++ (nonnull NSString *)moduleName;
 //MARK: - Setup
-+ (void)configure;
-+ (void)configureWithApplication:(nullable UIApplication *)application
+- (void)configure;
+- (void)configureWithApplication:(nullable UIApplication *)application
                 andLaunchOptions:(nullable NSDictionary *)launchOptions;
 
 
 //MARK: - Actions
-+ (BOOL)application:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
             options:(NSDictionary *)options;
 
-+ (void)authenticateWithParentVC:(UIViewController *)parentVC
+- (void)authenticateWithParentVC:(UIViewController *)parentVC
                          success:(void(^)(MAGSocialAuth *data))success
                          failure:(MAGSocialNetworkFailureCallback)failure;
 
-+ (void)loadMyProfile:(void(^)(MAGSocialUser *user))success failure:(MAGSocialNetworkFailureCallback)failure;
+- (void)loadMyProfile:(void(^)(MAGSocialUser *user))success failure:(MAGSocialNetworkFailureCallback)failure;
 
 @end
 

@@ -15,12 +15,12 @@
 
 
 //MARK: - Setup
-+ (void)configure {
+- (void)configure {
     [self configureWithApplication:nil andLaunchOptions:nil];
 }
 
 
-+ (void)configureWithApplication:(nullable UIApplication *)application
+- (void)configureWithApplication:(nullable UIApplication *)application
                 andLaunchOptions:(nullable NSDictionary *)launchOptions {
     NSAssert(false, @"Should be implemented in subclasses");
 }
@@ -29,24 +29,22 @@
 
 
 //MARK: - Common Properties
-+ (nullable NSDictionary *) settings {
-    return [[MAGSocial settingsPlist] objectForKey:NSStringFromClass(self)];
+- (nullable NSDictionary *)settings {
+    return [[MAGSocial.sharedInstance settingsPlist] objectForKey:NSStringFromClass(self.class)];
 }
 
 
-+ (nonnull NSString *) moduleName {
+- (nonnull NSString *)moduleName {
+    return NSStringFromClass(self.class);
+}
+
++ (nonnull NSString *)moduleName {
     return NSStringFromClass(self);
 }
 
-- (nonnull NSString *) moduleName {
-    return NSStringFromClass([self class]);
-}
-
-
-
 
 //MARK: - Stubs
-+ (BOOL)application:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
             options:(NSDictionary *)options {
     NSAssert(false, @"Should be implemented in subclasses");
@@ -54,14 +52,14 @@
 }
 
 
-+ (void)authenticateWithParentVC:(UIViewController *)parentVC
+- (void)authenticateWithParentVC:(UIViewController *)parentVC
                          success:(void(^)(MAGSocialAuth *data))success
                          failure:(MAGSocialNetworkFailureCallback)failure {
     NSAssert(false, @"Should be implemented in subclasses");
 }
 
 
-+ (void)loadMyProfile:(void (^)(MAGSocialUser * _Nonnull))success failure:(MAGSocialNetworkFailureCallback)failure {
+- (void)loadMyProfile:(void (^)(MAGSocialUser * _Nonnull))success failure:(MAGSocialNetworkFailureCallback)failure {
     NSAssert(false, @"Should be implemented in subclasses");
 }
 

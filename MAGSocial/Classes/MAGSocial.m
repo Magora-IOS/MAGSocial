@@ -27,11 +27,14 @@ freely, subject to the following restrictions:
 #import "MAGSocialCommandProfile.h"
 
 
-static NSMutableArray<Class<MAGSocialNetwork>> *magSocialNetworks;
+//static NSMutableArray<MAGSocialNetworkBase *> *magSocialNetworks;
+//static NSMutableDictionary *magSocialNetworks;
 
 
 
 @interface MAGSocial ()
+
+@property (strong, nonatomic) NSMutableDictionary *magSocialNetworks;
 
 @end
 
@@ -44,10 +47,22 @@ static NSMutableArray<Class<MAGSocialNetwork>> *magSocialNetworks;
 
 #pragma mark - PUBLIC
 
-+ (void)registerNetwork:(Class<MAGSocialNetwork>)networkClass {
++ (MAGSocial *)sharedInstance {
+    static MAGSocial *sharedInstance = nil;
+    @synchronized(self) {
+        if (sharedInstance == nil)
+            sharedInstance = [[self alloc] init];
+    }
+    return sharedInstance;
+}
+
+
+- (void)registerNetwork:(Class<MAGSocialNetwork>)networkClass {
     if ([networkClass.class conformsToProtocol:@protocol(MAGSocialNetwork)]) {
         NSLog(@"MAGSocial. Register network: '%@'", networkClass);
-        [[self networks] addObject:networkClass];
+        
+        MAGSocialNetworkBase *network = [networkClass.class new];
+        [[self networks] setValue:network forKey:NSStringFromClass(networkClass)];
     }
     else {
         NSLog(
@@ -60,16 +75,16 @@ static NSMutableArray<Class<MAGSocialNetwork>> *magSocialNetworks;
 
 
 
-+ (void)application:(UIApplication *)application
+- (void)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    for (Class network in [self networks]) {
+    for (MAGSocialNetworkBase *network in [self networks].allValues) {
         [network configureWithApplication:application andLaunchOptions:launchOptions];
     }
 }
 
 
-+ (nullable NSDictionary *) settingsPlist {
+- (nullable NSDictionary *) settingsPlist {
     static NSDictionary *result = nil;
     @synchronized(self) {
         if (result == nil) {
@@ -88,11 +103,11 @@ static NSMutableArray<Class<MAGSocialNetwork>> *magSocialNetworks;
 
 
 
-+ (BOOL)application:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options {
 
-    for (Class network in [self networks]) {
+    for (Class network in [self networks].allValues) {
         BOOL handled = 
             [network
                 application:application
@@ -105,13 +120,15 @@ static NSMutableArray<Class<MAGSocialNetwork>> *magSocialNetworks;
 }
 
 
-+ (void)authenticateNetwork:(Class<MAGSocialNetwork>)networkClass
+- (void)authenticateNetwork:(Class<MAGSocialNetwork>)networkClass
     withParentVC:(UIViewController *)parentVC
     success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
-
-    MAGSocialCommandAuth *command = [[MAGSocialCommandAuth alloc] initWith:networkClass];
+    
+    id<MAGSocialNetwork> network = [self networkByClass:networkClass];
+    MAGSocialCommandAuth *command = [[MAGSocialCommandAuth alloc] initWith:network];
     command.vc = parentVC;
+    
     [command executeWithSuccess:^{
         success(command.result);
     }
@@ -121,11 +138,13 @@ static NSMutableArray<Class<MAGSocialNetwork>> *magSocialNetworks;
 }
 
 
-+ (void)loadMyProfile:(Class<MAGSocialNetwork>)networkClass
+- (void)loadMyProfile:(Class<MAGSocialNetwork>)networkClass
               success:(void(^)(MAGSocialUser *data))success
               failure:(MAGSocialNetworkFailureCallback)failure {
     
-    MAGSocialCommandProfile *command = [[MAGSocialCommandProfile alloc] initWith:networkClass];
+    id<MAGSocialNetwork> network = [self networkByClass:networkClass];
+    MAGSocialCommandProfile *command = [[MAGSocialCommandProfile alloc] initWith:network];
+    
     [command executeWithSuccess:^{
         success(command.result);
         
@@ -137,14 +156,18 @@ static NSMutableArray<Class<MAGSocialNetwork>> *magSocialNetworks;
          
 #pragma mark - PRIVATE
 
-+ (NSMutableArray<Class<MAGSocialNetwork>> *)networks {
-    static dispatch_once_t token;
-    dispatch_once(
-        &token,
-        ^{
-            magSocialNetworks = [NSMutableArray<MAGSocialNetwork> array];
-        });
-    return magSocialNetworks;
+- (NSMutableDictionary *)networks {
+    if (!self.magSocialNetworks) {
+        self.magSocialNetworks = @{}.mutableCopy;
+    }
+    return self.magSocialNetworks;
+}
+
+
+- (id<MAGSocialNetwork>)networkByClass:(Class<MAGSocialNetwork>)networkClass {
+    id<MAGSocialNetwork> network = [self networks][NSStringFromClass(networkClass)];
+    
+    return network;
 }
 
          

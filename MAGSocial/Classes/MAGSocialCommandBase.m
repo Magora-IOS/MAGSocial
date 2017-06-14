@@ -14,7 +14,7 @@
 @synthesize network;
 
 
-- (instancetype) initWith:(Class<MAGSocialNetwork>)paramNetwork {
+- (instancetype) initWith:(id<MAGSocialNetwork>)paramNetwork {
     self = [self init];
     self.network = paramNetwork;
     return self;

@@ -40,19 +40,19 @@ freely, subject to the following restrictions:
 @implementation MAGSocialGoogle
 
 //MARK: - Lifecycle
-+ (MAGSocialGoogle*)sharedInstance {
+/*+ (MAGSocialGoogle*)sharedInstance {
     static MAGSocialGoogle *sharedInstance = nil;
     @synchronized(self) {
         if (sharedInstance == nil)
             sharedInstance = [[self alloc] init];
     }
     return sharedInstance;
-}
+}*/
 
 
 
 //MARK: - Configuration
-+ (void)configureWithApplication:(UIApplication *)application
+- (void)configureWithApplication:(UIApplication *)application
                 andLaunchOptions:(NSDictionary *)launchOptions {
     [[self settings] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL* stop) {
         if ([key isEqual: @"CLIENT_ID"]) {
@@ -67,8 +67,8 @@ freely, subject to the following restrictions:
     NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
      */
     
-    [GIDSignIn sharedInstance].delegate = [self sharedInstance];
-    [GIDSignIn sharedInstance].uiDelegate = [self sharedInstance];
+    [GIDSignIn sharedInstance].delegate = self;
+    [GIDSignIn sharedInstance].uiDelegate = self;
 }
 
 
@@ -76,7 +76,7 @@ freely, subject to the following restrictions:
 
 
 
-+ (BOOL)application:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application
     openURL:(NSURL *)url
     options:(NSDictionary *)options {
 
@@ -90,35 +90,34 @@ freely, subject to the following restrictions:
 
 
 //MARK: - Auth
-+ (void)authenticateWithParentVC:(UIViewController *)parentVC
+- (void)authenticateWithParentVC:(UIViewController *)parentVC
                          success:(void(^)(MAGSocialAuth *data))success
                          failure:(MAGSocialNetworkFailureCallback)failure {
 
-    [self sharedInstance].parentVC = parentVC;
-    [self sharedInstance].authSuccess = success;
-    [self sharedInstance].failure = failure;
+    self.parentVC = parentVC;
+    self.authSuccess = success;
+    self.failure = failure;
     
     NSLog(@"%@ authenticate", self.moduleName);
     [[GIDSignIn sharedInstance] signIn];
 }
 
 
-- (void)signIn:(GIDSignIn *)signIn
-didSignInForUser:(GIDGoogleUser *)user
+- (void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user
     withError:(NSError *)error {
     if (error)
     {
-        NSLog(@"%@. Could not authorize: '%@'", self.class.moduleName, error);
+        NSLog(@"%@. Could not authorize: '%@'", self.moduleName, error);
         self.failure(error);
     }
     else {
         self.authSuccess([self.class createAuth:user]);
-        NSLog(@"%@. Successful authentication", self.class.moduleName);
+        NSLog(@"%@. Successful authentication", self.moduleName);
     }
 }
 
 
-+ (MAGSocialAuth *) createAuth:(GIDGoogleUser *)raw {
+- (MAGSocialAuth *) createAuth:(GIDGoogleUser *)raw {
     MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
     result.token = raw.authentication.accessToken;
     result.userData = [self createUser:raw];
@@ -126,7 +125,7 @@ didSignInForUser:(GIDGoogleUser *)user
 }
 
 
-+ (MAGSocialUser *) createUser:(GIDGoogleUser *)raw {
+- (MAGSocialUser *) createUser:(GIDGoogleUser *)raw {
     MAGSocialUser *result = [[MAGSocialUser alloc] initWith:raw];
     result.objectID = raw.userID;
     result.name = raw.profile.name;
@@ -135,14 +134,12 @@ didSignInForUser:(GIDGoogleUser *)user
 }
 
 
-- (void)signIn:(GIDSignIn *)signIn
-presentViewController:(UIViewController *)viewController {
+- (void)signIn:(GIDSignIn *)signIn presentViewController:(UIViewController *)viewController {
     [self.parentVC presentViewController:viewController animated:YES completion:nil];
 }
 
 
-- (void)signIn:(GIDSignIn *)signIn
-dismissViewController:(UIViewController *)viewController {
+- (void)signIn:(GIDSignIn *)signIn dismissViewController:(UIViewController *)viewController {
     [self.parentVC dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -74,7 +74,7 @@ freely, subject to the following restrictions:
 //MARK: - Routines
 - (void) authenticateNetwork:(_Nonnull Class<MAGSocialNetwork>)network {
     NSLog(@"MAGViewController. Authenticate %@ started", [network moduleName]);
-    [MAGSocial authenticateNetwork:network
+    [MAGSocial.sharedInstance authenticateNetwork:network
                       withParentVC:self
                            success:^(MAGSocialAuth * _Nonnull data) {
                                
@@ -90,7 +90,7 @@ freely, subject to the following restrictions:
 
 - (void)loadMyProfileWithNetwork:(_Nonnull Class<MAGSocialNetwork>)network {
     
-    [MAGSocial loadMyProfile:network success:^(MAGSocialUser * _Nonnull data) {
+    [MAGSocial.sharedInstance loadMyProfile:network success:^(MAGSocialUser * _Nonnull data) {
         NSString *message = [NSString stringWithFormat:@"%@\n\n%@", data, data.objectID];
         [self showResultMessage:message];
         
