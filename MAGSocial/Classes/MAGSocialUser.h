@@ -21,5 +21,9 @@
 @property (nullable, nonatomic, strong) NSString *objectID;
 @property (nullable, nonatomic, strong) NSString *name;
 @property (nullable, nonatomic, strong) NSString *email;
+@property (nullable, nonatomic, strong) NSString *firstName;
+@property (nullable, nonatomic, strong) NSString *lastName;
+@property (nullable, nonatomic, strong) NSString *gender;
+@property (nullable, nonatomic, strong) NSString *pictureUrl;
 
 @end

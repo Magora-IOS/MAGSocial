@@ -103,7 +103,7 @@ freely, subject to the following restrictions:
 
 + (void)loadMyProfile:(void(^)(MAGSocialUser *user))success failure:(MAGSocialNetworkFailureCallback)failure {
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
-                                                                   parameters:@{@"fields": @"name, first_name, last_name, email, gender, id"}];
+                                                                   parameters:@{@"fields": @"name, first_name, last_name, email, gender, id, picture.width(1080).height(1080)"}];
     
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (error) {
@@ -124,7 +124,11 @@ freely, subject to the following restrictions:
     result.objectID = data[@"id"];
     result.email = data[@"email"];
     result.name = data[@"name"];
-    //...
+    result.firstName = data[@"first_name"];
+    result.lastName = data[@"last_name"];
+    result.gender = data[@"gender"];
+    result.pictureUrl = [data valueForKeyPath:@"picture.data.url"];
+    
     return result;
 }
 

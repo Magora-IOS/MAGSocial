@@ -18,7 +18,7 @@
 
 
 - (NSString *) description {
-    return [NSString stringWithFormat:@"User: id %@, email: %@, name: %@", self.objectID, self.email, self.name];
+    return [NSString stringWithFormat:@"User: id %@\n email: %@\n name: %@\n firstName: %@\n lastName: %@\n gender: %@\n picture: %@", self.objectID, self.email, self.name, self.firstName, self.lastName, self.gender, self.pictureUrl];
 }
 
 
