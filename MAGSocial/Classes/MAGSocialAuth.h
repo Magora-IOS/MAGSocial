@@ -17,6 +17,7 @@
 @property (nullable, nonatomic, strong) MAGSocialUser *userData;
 
 @property (nullable, nonatomic, strong) NSString *token;
+@property (nullable, nonatomic, strong) NSString *userID;
 @property (nullable, nonatomic, strong) id raw;
 
 @end

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="whP-gf-Uak">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="whP-gf-Uak">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -63,19 +63,49 @@
                                     <constraint firstAttribute="height" constant="1" id="CRi-Ct-AqK"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L6M-ig-Goz">
+                                <rect key="frame" x="16" y="307" width="343" height="30"/>
+                                <state key="normal" title="Profile / Twitter"/>
+                                <connections>
+                                    <action selector="profileTwitterAction:" destination="whP-gf-Uak" eventType="touchUpInside" id="D3k-rZ-erR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hxs-2H-MOJ">
+                                <rect key="frame" x="16" y="345" width="343" height="30"/>
+                                <state key="normal" title="Profile / Google"/>
+                                <connections>
+                                    <action selector="profileGoogleAction:" destination="whP-gf-Uak" eventType="touchUpInside" id="j1U-Pg-adj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8a-cl-Gzr">
+                                <rect key="frame" x="16" y="383" width="343" height="30"/>
+                                <state key="normal" title="Profile / VK"/>
+                                <connections>
+                                    <action selector="profileVKAction:" destination="whP-gf-Uak" eventType="touchUpInside" id="eyE-9U-BIl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="hxs-2H-MOJ" firstAttribute="top" secondItem="L6M-ig-Goz" secondAttribute="bottom" constant="8" id="06T-1y-bzs"/>
+                            <constraint firstItem="hxs-2H-MOJ" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="487-0Z-sRI"/>
+                            <constraint firstItem="L6M-ig-Goz" firstAttribute="top" secondItem="1FB-qI-eBB" secondAttribute="bottom" constant="8" id="9Oj-S1-8MX"/>
+                            <constraint firstItem="A8a-cl-Gzr" firstAttribute="top" secondItem="hxs-2H-MOJ" secondAttribute="bottom" constant="8" id="9us-Ly-Clj"/>
                             <constraint firstItem="Hnt-S3-PbN" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="CJr-MF-e2b"/>
+                            <constraint firstItem="A8a-cl-Gzr" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="KUb-eL-J4X"/>
                             <constraint firstItem="mvC-JX-Wg4" firstAttribute="top" secondItem="Hnt-S3-PbN" secondAttribute="bottom" constant="16" id="L0d-Wd-WyL"/>
                             <constraint firstItem="kIa-mg-rPw" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="NDR-qb-ABE"/>
+                            <constraint firstItem="L6M-ig-Goz" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="O1J-do-wyd"/>
                             <constraint firstItem="uWP-2h-yYC" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="VKR-aa-bWp"/>
                             <constraint firstItem="kIa-mg-rPw" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="bWE-mO-u2i"/>
                             <constraint firstItem="mvC-JX-Wg4" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="btM-eY-cFZ"/>
+                            <constraint firstItem="L6M-ig-Goz" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="c4x-fk-DDp"/>
                             <constraint firstItem="uWP-2h-yYC" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="cA9-9u-Dfh"/>
                             <constraint firstItem="1FB-qI-eBB" firstAttribute="top" secondItem="Oal-jU-5A9" secondAttribute="bottom" constant="16" id="cyu-2m-bMU"/>
                             <constraint firstItem="mvC-JX-Wg4" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="dCm-hg-PRd"/>
+                            <constraint firstItem="hxs-2H-MOJ" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="ehk-Bs-I0U"/>
                             <constraint firstItem="1FB-qI-eBB" firstAttribute="trailing" secondItem="TpU-gO-2f1" secondAttribute="trailingMargin" id="fnq-YG-56Z"/>
+                            <constraint firstItem="A8a-cl-Gzr" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" id="g5D-g4-HT7"/>
                             <constraint firstItem="uWP-2h-yYC" firstAttribute="top" secondItem="kIa-mg-rPw" secondAttribute="bottom" constant="16" id="hwx-uS-Yp6"/>
                             <constraint firstItem="Hnt-S3-PbN" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" constant="48" id="icI-Mw-6HY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Hnt-S3-PbN" secondAttribute="trailing" id="lez-1Y-ZPZ"/>

@@ -21,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MAGSocialNetwork <NSObject>
 
 @property (nonatomic, nonnull, readonly) NSString *moduleName;
+@property (strong, atomic) MAGSocialAuth *socialAuth;
+@property (strong, atomic) MAGSocialUser *socialUser;
+@property (assign, atomic) NSUInteger preferredPhotoSize;
 
 + (nonnull NSString *)moduleName;
 //MARK: - Setup

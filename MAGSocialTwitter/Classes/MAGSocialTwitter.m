@@ -75,10 +75,42 @@ freely, subject to the following restrictions:
 }
 
 
+- (void)loadMyProfile:(void (^)(MAGSocialUser * _Nonnull))success failure:(MAGSocialNetworkFailureCallback)failure {
+    NSString *userID = self.socialAuth.userID;
+    
+    TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
+    [client loadUserWithID:userID completion:^(TWTRUser * _Nullable user, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"%@. Could not get profile: '%@'", self.moduleName, error);
+            failure(error);
+            
+        } else {
+            NSLog(@"%@. User cancelled request", self.moduleName);
+            MAGSocialUser *socialUser = [self createUserProfile:user];
+            success(socialUser);
+        }
+    }];
+}
+
+
+- (MAGSocialUser *)createUserProfile:(TWTRUser *)user {
+    MAGSocialUser *result = [[MAGSocialUser alloc] initWith:user];
+    result.objectID = user.userID;
+    result.email = nil;
+    result.name = user.screenName;
+    result.firstName = user.name;
+    result.lastName = nil;
+    result.gender = nil;
+    result.pictureUrl = user.profileImageLargeURL;
+    
+    return result;
+}
+
 
 - (MAGSocialAuth *)createAuth:(TWTRSession *)raw {
     MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
     result.token = raw.authToken;
+    result.userID = raw.userID;
     result.userData = [self createUser:raw];
     return result;
 }

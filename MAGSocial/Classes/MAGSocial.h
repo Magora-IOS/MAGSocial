@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 
 - (nullable NSDictionary *) settingsPlist;
-
+- (id<MAGSocialNetwork>)socialNetwork:(Class<MAGSocialNetwork>)networkClass;
 
 
 //MARK: - Actions

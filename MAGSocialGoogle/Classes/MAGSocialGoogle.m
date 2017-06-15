@@ -30,8 +30,9 @@ freely, subject to the following restrictions:
 @interface MAGSocialGoogle () <GIDSignInDelegate, GIDSignInUIDelegate>
 
 @property (nullable, nonatomic, weak) UIViewController *parentVC;
-@property (nonatomic, strong) void(^authSuccess)(MAGSocialAuth *data);
-@property (nonatomic, strong) MAGSocialNetworkFailureCallback failure;
+@property (nonatomic, copy) void(^authSuccess)(MAGSocialAuth *data);
+@property (nonatomic, copy) void(^userSuccess)(MAGSocialUser *data);
+@property (nonatomic, copy) MAGSocialNetworkFailureCallback failure;
 
 @end
 
@@ -108,28 +109,51 @@ freely, subject to the following restrictions:
     if (error)
     {
         NSLog(@"%@. Could not authorize: '%@'", self.moduleName, error);
-        self.failure(error);
+        if (self.failure) {
+            self.failure(error);
+        }
     }
     else {
-        self.authSuccess([self.class createAuth:user]);
+        if (self.authSuccess) {
+            self.authSuccess([self createAuth:user]);
+        }
+        if (self.userSuccess) {
+            self.userSuccess([self createUser:user]);
+        }
         NSLog(@"%@. Successful authentication", self.moduleName);
     }
+    
+    self.authSuccess = nil;
+    self.userSuccess = nil;
+    self.failure = nil;
 }
 
 
-- (MAGSocialAuth *) createAuth:(GIDGoogleUser *)raw {
+- (void)loadMyProfile:(void (^)(MAGSocialUser * _Nonnull))success failure:(MAGSocialNetworkFailureCallback)failure {
+    self.userSuccess = success;
+    self.failure = failure;
+    
+    [[GIDSignIn sharedInstance] signIn];
+}
+
+
+- (MAGSocialAuth *)createAuth:(GIDGoogleUser *)raw {
     MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
     result.token = raw.authentication.accessToken;
+    result.userID = raw.userID;
     result.userData = [self createUser:raw];
     return result;
 }
 
 
-- (MAGSocialUser *) createUser:(GIDGoogleUser *)raw {
+- (MAGSocialUser *)createUser:(GIDGoogleUser *)raw {
     MAGSocialUser *result = [[MAGSocialUser alloc] initWith:raw];
     result.objectID = raw.userID;
     result.name = raw.profile.name;
     result.email = raw.profile.email;
+    result.firstName = raw.profile.givenName;
+    result.lastName = raw.profile.familyName;
+    result.pictureUrl = [raw.profile imageURLWithDimension:self.preferredPhotoSize].absoluteString;
     return result;
 }
 

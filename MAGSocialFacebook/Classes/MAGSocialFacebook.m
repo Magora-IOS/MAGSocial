@@ -102,8 +102,11 @@ freely, subject to the following restrictions:
 
 
 - (void)loadMyProfile:(void(^)(MAGSocialUser *user))success failure:(MAGSocialNetworkFailureCallback)failure {
+    
+    NSString *fields = [NSString stringWithFormat:@"name, first_name, last_name, email, gender, id, picture.width(%li).height(%li)",
+                        self.preferredPhotoSize, self.preferredPhotoSize];
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
-                                                                   parameters:@{@"fields": @"name, first_name, last_name, email, gender, id, picture.width(1080).height(1080)"}];
+                                                                   parameters:@{@"fields": fields}];
     
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (error) {
@@ -136,6 +139,7 @@ freely, subject to the following restrictions:
 - (MAGSocialAuth *)createAuth:(FBSDKLoginManagerLoginResult *)raw {
     MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
     result.token = raw.token.tokenString;
+    result.userID = raw.token.userID;
     result.userData = [self createUser:raw];
     return result;
 }

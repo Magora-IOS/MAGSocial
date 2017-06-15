@@ -68,11 +68,23 @@ freely, subject to the following restrictions:
     [self loadMyProfileWithNetwork:[MAGSocialFacebook class]];
 }
 
+- (IBAction)profileTwitterAction:(id)sender {
+    [self loadMyProfileWithNetwork:[MAGSocialTwitter class]];
+}
+
+- (IBAction)profileGoogleAction:(id)sender {
+    [self loadMyProfileWithNetwork:[MAGSocialGoogle class]];
+}
+
+- (IBAction)profileVKAction:(id)sender {
+    [self loadMyProfileWithNetwork:[MAGSocialVK class]];
+}
+
 
 
 
 //MARK: - Routines
-- (void) authenticateNetwork:(_Nonnull Class<MAGSocialNetwork>)network {
+- (void)authenticateNetwork:(_Nonnull Class<MAGSocialNetwork>)network {
     NSLog(@"MAGViewController. Authenticate %@ started", [network moduleName]);
     [MAGSocial.sharedInstance authenticateNetwork:network
                       withParentVC:self
@@ -84,6 +96,7 @@ freely, subject to the following restrictions:
                     
     } failure:^(NSError * _Nullable error) {
         NSLog(@"MAGViewController. %@ authentication failed", [network moduleName]);
+        [self showError:error];
     }];
 }
 
@@ -96,12 +109,24 @@ freely, subject to the following restrictions:
         
     } failure:^(NSError * _Nullable error) {
         NSLog(@"MAGViewController. %@ authentication failed", [network moduleName]);
+        [self showError:error];
     }];
 }
 
 
 - (void)showResultMessage:(NSString *)message {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Result"
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    
+    [self presentViewController:alert animated:true completion:nil];
+}
+
+
+- (void)showError:(NSError *)error {
+    NSString *message = [NSString stringWithFormat:@"%@\n%@", error.localizedDescription, error.localizedFailureReason];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];

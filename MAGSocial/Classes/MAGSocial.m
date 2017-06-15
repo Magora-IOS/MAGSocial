@@ -125,11 +125,12 @@ freely, subject to the following restrictions:
     success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
     
-    id<MAGSocialNetwork> network = [self networkByClass:networkClass];
+    id<MAGSocialNetwork> network = [self socialNetwork:networkClass];
     MAGSocialCommandAuth *command = [[MAGSocialCommandAuth alloc] initWith:network];
     command.vc = parentVC;
     
     [command executeWithSuccess:^{
+        network.socialAuth = command.result;
         success(command.result);
     }
                         failure:^(NSError * _Nullable error) {
@@ -142,10 +143,11 @@ freely, subject to the following restrictions:
               success:(void(^)(MAGSocialUser *data))success
               failure:(MAGSocialNetworkFailureCallback)failure {
     
-    id<MAGSocialNetwork> network = [self networkByClass:networkClass];
+    id<MAGSocialNetwork> network = [self socialNetwork:networkClass];
     MAGSocialCommandProfile *command = [[MAGSocialCommandProfile alloc] initWith:network];
     
     [command executeWithSuccess:^{
+        network.socialUser = command.result;
         success(command.result);
         
     } failure:^(NSError * _Nullable error) {
@@ -164,7 +166,7 @@ freely, subject to the following restrictions:
 }
 
 
-- (id<MAGSocialNetwork>)networkByClass:(Class<MAGSocialNetwork>)networkClass {
+- (id<MAGSocialNetwork>)socialNetwork:(Class<MAGSocialNetwork>)networkClass {
     id<MAGSocialNetwork> network = [self networks][NSStringFromClass(networkClass)];
     
     return network;

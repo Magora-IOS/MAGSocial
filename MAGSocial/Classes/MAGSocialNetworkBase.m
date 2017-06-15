@@ -13,10 +13,15 @@
 
 @implementation MAGSocialNetworkBase
 
+@synthesize socialAuth;
+@synthesize socialUser;
+@synthesize preferredPhotoSize;
+
 
 //MARK: - Setup
 - (void)configure {
     [self configureWithApplication:nil andLaunchOptions:nil];
+    self.preferredPhotoSize = 720;
 }
 
 

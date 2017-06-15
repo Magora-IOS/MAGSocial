@@ -30,8 +30,9 @@ freely, subject to the following restrictions:
 @interface MAGSocialVK () <VKSdkDelegate, VKSdkUIDelegate>
 
 @property (nullable, nonatomic, weak) UIViewController *parentVC;
-@property (nonatomic, strong) void(^authSuccess)(MAGSocialAuth *data);
-@property (nonatomic, strong) MAGSocialNetworkFailureCallback failure;
+@property (nonatomic, copy) void(^authSuccess)(MAGSocialAuth *data);
+@property (nonatomic, copy) void(^userSuccess)(MAGSocialUser *data);
+@property (nonatomic, copy) MAGSocialNetworkFailureCallback failure;
 
 @end
 
@@ -93,15 +94,47 @@ freely, subject to the following restrictions:
 }
 
 
+- (void)loadMyProfile:(void (^)(MAGSocialUser * _Nonnull))success failure:(MAGSocialNetworkFailureCallback)failure {
+    /*self.userSuccess = success;
+    self.failure = failure;
+    
+    NSLog(@"%@ load profile", self.moduleName);
+    //if ( [VKSdk isLoggedIn] == NO ) {
+        //[VKSdk forceLogout];
+        [VKSdk authorize:@[@"email"]];
+    //}
+     */
+    
+    MAGSocialUser *result = self.socialAuth.userData;
+    if (result) {
+        success(result);
+    } else {
+        failure([NSError errorWithDomain:@"MAGSocialVK" code:1 userInfo:@{NSLocalizedDescriptionKey : @"Not authorized user"}]);
+    }
+}
+
+
 - (void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result {
     if (result.token) {
         [self.parentVC dismissViewControllerAnimated:true completion:nil];
-        self.authSuccess([self.class createAuth:result]);
+        
+        if (self.authSuccess) {
+            self.authSuccess([self createAuth:result]);
+        }
+        if (self.userSuccess) {
+            self.userSuccess([self createUser:result.user]);
+        }
         NSLog(@"%@. Successful authentication", self.moduleName);
     } else if (result.error) {
         NSLog(@"%@. Could not authorize: '%@'", self.moduleName, result.error);
-        self.failure(result.error);
+        if (self.failure) {
+            self.failure(result.error);
+        }
     }
+    
+    self.authSuccess = nil;
+    self.userSuccess = nil;
+    self.failure = nil;
 }
 
 
@@ -124,6 +157,7 @@ freely, subject to the following restrictions:
 - (MAGSocialAuth *)createAuth:(VKAuthorizationResult *)raw {
     MAGSocialAuth *result = [[MAGSocialAuth alloc] initWith:raw];
     result.token = raw.token.accessToken;
+    result.userID = raw.user.id.stringValue;
     result.userData = [self createUser:raw.user];
     return result;
 }
@@ -133,6 +167,11 @@ freely, subject to the following restrictions:
     MAGSocialUser *result = [[MAGSocialUser alloc] initWith:raw];
     result.objectID = raw.id.stringValue;
     result.name = [NSString stringWithFormat:@"%@ %@", raw.first_name, raw.last_name];
+    result.email = nil;
+    result.firstName = raw.first_name;
+    result.lastName = raw.last_name;
+    result.gender = raw.sex.stringValue;
+    result.pictureUrl = raw.photo_max_orig;
     return result;
 }
 
