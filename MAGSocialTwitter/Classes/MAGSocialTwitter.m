@@ -58,6 +58,16 @@ freely, subject to the following restrictions:
 }
 
 
+- (BOOL)isSignedIn {
+    TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
+    //NSString *userID = store.session.userID;
+    if (store.session) {
+        return YES;
+    }
+    return NO;
+}
+
+
 - (void)authenticateWithParentVC:(UIViewController *)parentVC
     success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
@@ -76,7 +86,8 @@ freely, subject to the following restrictions:
 
 
 - (void)loadMyProfile:(void (^)(MAGSocialUser * _Nonnull))success failure:(MAGSocialNetworkFailureCallback)failure {
-    NSString *userID = self.socialAuth.userID;
+    TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
+    NSString *userID = store.session.userID; //self.socialAuth.userID;
     
     TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
     [client loadUserWithID:userID completion:^(TWTRUser * _Nullable user, NSError * _Nullable error) {

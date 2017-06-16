@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
             openURL:(NSURL *)url
             options:(NSDictionary *)options;
 
+- (BOOL)isSignedIn;
 - (void)authenticateWithParentVC:(UIViewController *)parentVC
                          success:(void(^)(MAGSocialAuth *data))success
                          failure:(MAGSocialNetworkFailureCallback)failure;

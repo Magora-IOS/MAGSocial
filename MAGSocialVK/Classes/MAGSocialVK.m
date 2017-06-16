@@ -31,7 +31,6 @@ freely, subject to the following restrictions:
 
 @property (nullable, nonatomic, weak) UIViewController *parentVC;
 @property (nonatomic, copy) void(^authSuccess)(MAGSocialAuth *data);
-@property (nonatomic, copy) void(^userSuccess)(MAGSocialUser *data);
 @property (nonatomic, copy) MAGSocialNetworkFailureCallback failure;
 
 @end
@@ -78,6 +77,11 @@ freely, subject to the following restrictions:
 }
 
 
+- (BOOL)isSignedIn {
+    return [VKSdk isLoggedIn];
+}
+
+
 - (void)authenticateWithParentVC:(UIViewController *)parentVC
     success:(void(^)(MAGSocialAuth *data))success
     failure:(MAGSocialNetworkFailureCallback)failure {
@@ -95,22 +99,28 @@ freely, subject to the following restrictions:
 
 
 - (void)loadMyProfile:(void (^)(MAGSocialUser * _Nonnull))success failure:(MAGSocialNetworkFailureCallback)failure {
-    /*self.userSuccess = success;
-    self.failure = failure;
+    /*NSString *fields = @"id,first_name,last_name,sex,bdate,city,country,photo_50,photo_100,photo_200_orig,photo_200,photo_400_orig,photo_max,photo_max_orig,online,online_mobile,lists,domain,has_mobile,contacts,connections,site,education,universities,schools,can_post,can_see_all_posts,can_see_audio,can_write_private_message,status,last_seen,common_count,relation,relatives,counters";
+    */
     
-    NSLog(@"%@ load profile", self.moduleName);
-    //if ( [VKSdk isLoggedIn] == NO ) {
-        //[VKSdk forceLogout];
-        [VKSdk authorize:@[@"email"]];
-    //}
-     */
+    NSString *fields = @"id,first_name,last_name,sex,bdate,city,country,photo_50,photo_100,photo_200_orig,photo_200,photo_400_orig,photo_max,photo_max_orig";
     
-    MAGSocialUser *result = self.socialAuth.userData;
-    if (result) {
-        success(result);
-    } else {
-        failure([NSError errorWithDomain:@"MAGSocialVK" code:1 userInfo:@{NSLocalizedDescriptionKey : @"Not authorized user"}]);
-    }
+    VKRequest *request = [[VKApi users] get:@{VK_API_FIELDS : fields}];
+    //VKUser *user = [VKSdk accessToken].localUser;
+    
+    [request executeWithResultBlock:^(VKResponse *response) {
+         VKUser * user = ((VKUsersArray*)response.parsedModel).firstObject;
+        if (user) {
+            MAGSocialUser *result = [self createUser:user];
+            success(result);
+        } else {
+            NSError *error = [NSError errorWithDomain:self.moduleName code:1 userInfo:@{NSLocalizedDescriptionKey: @"You should be signed in VK"}];
+            failure(error);
+        }
+        
+     } errorBlock:^(NSError *error) {
+         NSLog(@"Error: %@", error);
+         failure(error);
+     }];
 }
 
 
@@ -121,10 +131,8 @@ freely, subject to the following restrictions:
         if (self.authSuccess) {
             self.authSuccess([self createAuth:result]);
         }
-        if (self.userSuccess) {
-            self.userSuccess([self createUser:result.user]);
-        }
         NSLog(@"%@. Successful authentication", self.moduleName);
+        
     } else if (result.error) {
         NSLog(@"%@. Could not authorize: '%@'", self.moduleName, result.error);
         if (self.failure) {
@@ -133,7 +141,6 @@ freely, subject to the following restrictions:
     }
     
     self.authSuccess = nil;
-    self.userSuccess = nil;
     self.failure = nil;
 }
 

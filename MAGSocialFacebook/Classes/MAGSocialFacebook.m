@@ -73,6 +73,13 @@ freely, subject to the following restrictions:
 }
 
 
+- (BOOL)isSignedIn {
+    if ([FBSDKAccessToken currentAccessToken]) {
+        return YES;
+    }
+    return NO;
+}
+
 
 //MARK: - Actions
 - (void)authenticateWithParentVC:(UIViewController *)parentVC

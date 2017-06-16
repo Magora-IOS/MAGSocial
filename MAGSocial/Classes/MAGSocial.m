@@ -144,15 +144,21 @@ freely, subject to the following restrictions:
               failure:(MAGSocialNetworkFailureCallback)failure {
     
     id<MAGSocialNetwork> network = [self socialNetwork:networkClass];
-    MAGSocialCommandProfile *command = [[MAGSocialCommandProfile alloc] initWith:network];
     
-    [command executeWithSuccess:^{
-        network.socialUser = command.result;
-        success(command.result);
+    if ([network isSignedIn]) {
+        MAGSocialCommandProfile *command = [[MAGSocialCommandProfile alloc] initWith:network];
+        [command executeWithSuccess:^{
+            network.socialUser = command.result;
+            success(command.result);
+            
+        } failure:^(NSError * _Nullable error) {
+            failure(error);
+        }];
         
-    } failure:^(NSError * _Nullable error) {
+    } else {
+        NSError *error = [NSError errorWithDomain:network.moduleName code:1 userInfo:@{NSLocalizedDescriptionKey: @"You should be signed in social network"}];
         failure(error);
-    }];
+    }
 }
 
          

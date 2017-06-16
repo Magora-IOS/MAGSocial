@@ -57,6 +57,12 @@
 }
 
 
+- (BOOL)isSignedIn {
+    NSAssert(false, @"Should be implemented in subclasses");
+    return NO;
+}
+
+
 - (void)authenticateWithParentVC:(UIViewController *)parentVC
                          success:(void(^)(MAGSocialAuth *data))success
                          failure:(MAGSocialNetworkFailureCallback)failure {

@@ -89,6 +89,14 @@ freely, subject to the following restrictions:
 }
 
 
+- (BOOL)isSignedIn {
+    if ([[GIDSignIn sharedInstance] currentUser]) {
+        return YES;
+    }
+    return NO;
+}
+
+
 
 //MARK: - Auth
 - (void)authenticateWithParentVC:(UIViewController *)parentVC
