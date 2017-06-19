@@ -161,6 +161,7 @@ freely, subject to the following restrictions:
     result.email = raw.profile.email;
     result.firstName = raw.profile.givenName;
     result.lastName = raw.profile.familyName;
+    result.gender = MAGSocialUserGenderUndefined;
     result.pictureUrl = [raw.profile imageURLWithDimension:self.preferredPhotoSize].absoluteString;
     return result;
 }

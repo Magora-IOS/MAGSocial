@@ -177,8 +177,20 @@ freely, subject to the following restrictions:
     result.email = nil;
     result.firstName = raw.first_name;
     result.lastName = raw.last_name;
-    result.gender = raw.sex.stringValue;
+    result.gender = [self genderWithNumber:raw.sex];
     result.pictureUrl = raw.photo_max_orig;
+    return result;
+}
+
+
+- (MAGSocialUserGender)genderWithNumber:(NSNumber *)genderNumber {
+    MAGSocialUserGender result = MAGSocialUserGenderUndefined;
+    if (genderNumber.integerValue == 1) {
+        result = MAGSocialUserGenderFemale;
+    } else if (genderNumber && genderNumber.integerValue == 0) {
+        result = MAGSocialUserGenderMale;
+    }
+    
     return result;
 }
 

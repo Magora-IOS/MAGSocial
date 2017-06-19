@@ -111,7 +111,7 @@ freely, subject to the following restrictions:
     result.name = user.screenName;
     result.firstName = user.name;
     result.lastName = nil;
-    result.gender = nil;
+    result.gender = MAGSocialUserGenderUndefined;
     result.pictureUrl = user.profileImageLargeURL;
     
     return result;
@@ -127,7 +127,7 @@ freely, subject to the following restrictions:
 }
 
 
-- (MAGSocialUser *) createUser:(TWTRSession *)raw {
+- (MAGSocialUser *)createUser:(TWTRSession *)raw {
     MAGSocialUser *result = [[MAGSocialUser alloc] initWith:raw];
     result.objectID = raw.userID;
     result.name = raw.userName;

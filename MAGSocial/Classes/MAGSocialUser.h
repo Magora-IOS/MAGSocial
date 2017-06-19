@@ -10,6 +10,12 @@
 #import "MAGSocialAuth.h"
 
 
+typedef enum : NSUInteger {
+    MAGSocialUserGenderUndefined,
+    MAGSocialUserGenderMale,
+    MAGSocialUserGenderFemale,
+} MAGSocialUserGender;
+
 
 @interface MAGSocialUser : NSObject
 
@@ -23,7 +29,7 @@
 @property (nullable, nonatomic, strong) NSString *email;
 @property (nullable, nonatomic, strong) NSString *firstName;
 @property (nullable, nonatomic, strong) NSString *lastName;
-@property (nullable, nonatomic, strong) NSString *gender;
+@property (nonatomic, assign) MAGSocialUserGender gender;
 @property (nullable, nonatomic, strong) NSString *pictureUrl;
 
 @end

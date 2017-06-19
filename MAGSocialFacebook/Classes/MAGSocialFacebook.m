@@ -129,6 +129,18 @@ freely, subject to the following restrictions:
 }
 
 
+- (MAGSocialUserGender)genderWithString:(NSString *)genderString {
+    MAGSocialUserGender gender = MAGSocialUserGenderUndefined;
+    if ([genderString isEqualToString:@"male"]) {
+        gender = MAGSocialUserGenderMale;
+    } else if ([genderString isEqualToString:@"female"]) {
+        gender = MAGSocialUserGenderFemale;
+    }
+    
+    return gender;
+}
+
+
 - (MAGSocialUser *)createUserWithDictionary:(NSDictionary *)data {
     MAGSocialUser *result = [[MAGSocialUser alloc] initWith:data];
     result.objectID = data[@"id"];
@@ -136,7 +148,7 @@ freely, subject to the following restrictions:
     result.name = data[@"name"];
     result.firstName = data[@"first_name"];
     result.lastName = data[@"last_name"];
-    result.gender = data[@"gender"];
+    result.gender = [self genderWithString:data[@"gender"]];
     result.pictureUrl = [data valueForKeyPath:@"picture.data.url"];
     
     return result;
